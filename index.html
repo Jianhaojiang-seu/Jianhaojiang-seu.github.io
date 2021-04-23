@@ -152,6 +152,95 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-R-LWE论文——Lattice-Cyptography-for-the-internet" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/04/23/R-LWE%E8%AE%BA%E6%96%87%E2%80%94%E2%80%94Lattice-Cyptography-for-the-internet/">R-LWE论文——Lattice Cyptography for the internet</a>
+    </h1>
+  
+
+        
+        <a href="/2021/04/23/R-LWE%E8%AE%BA%E6%96%87%E2%80%94%E2%80%94Lattice-Cyptography-for-the-internet/" class="archive-article-date">
+  	<time datetime="2021-04-23T06:24:54.140Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-23</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Lattice-Cryptography-for-the-Internet"><a href="#Lattice-Cryptography-for-the-Internet" class="headerlink" title="Lattice Cryptography for the Internet"></a>Lattice Cryptography for the Internet</h1><p>Chris Peikert</p>
+<p>2014-06-16</p>
+<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>本文主要介绍了格基密码学以及其可证明的抗量子计算性能。为了在现实世界中密码系统和协议上得到应用，本文提出了一些用于密钥传输的有效格基协议。</p>
+<h2 id="1-引言"><a href="#1-引言" class="headerlink" title="1. 引言"></a>1. 引言</h2><p>（主要介绍了基于环的各类格难题，以及他们建立的各类加密、签名方案）</p>
+<p>R-SIS和R-LWE的在<strong>平均情况下</strong>的困难性的基础：<strong>最坏情况</strong>下的SVP问题在<strong>所谓理想格</strong>中是难以近似求出的，甚至是对于量子计算机而言。</p>
+<p>Both R-SIS and R-lwe enjoy strong provable hardness guarantees: they are hard <em>on average</em> as long as the Shortest Vector Problem is hard to approximate (by quantum computers, in the case of R-LWE) on <strong>so called <em>ideal</em> lattice</strong> in corresponding ring, <em>in the worst case</em>.</p>
+<p>这一结果为R-SIS和R-LWE问题提供了坚实的密码学基础，并通过具体的密码分析成果巩固了这一基础。</p>
+<h3 id="1-1-本文创新点"><a href="#1-1-本文创新点" class="headerlink" title="1.1 本文创新点"></a>1.1 本文创新点</h3><p>本文提出了一个高效实用的格基协议，适用于非对称密码学任务，例如加密、密钥封装和传递和认证密钥交换。</p>
+<h4 id="加密和密钥传递"><a href="#加密和密钥传递" class="headerlink" title="加密和密钥传递"></a>加密和密钥传递</h4><h4 id="认证密钥交换"><a href="#认证密钥交换" class="headerlink" title="认证密钥交换"></a>认证密钥交换</h4><h2 id="2-预备知识"><a href="#2-预备知识" class="headerlink" title="2 预备知识"></a>2 预备知识</h2><p>本文中对实数x，取整为四舍五入；环Zq为商环Z/qZ，例如环的陪集x+qZ（实质上引入了加法和乘法运算）。</p>
+<h3 id="2-1-密码学定义"><a href="#2-1-密码学定义" class="headerlink" title="2.1 密码学定义"></a>2.1 密码学定义</h3><ol>
+<li>安全参数λ是一元的，决定了方案的安全程度</li>
+<li>方案中的算法是高效的(efficient)，即运行在多项式时间内</li>
+<li>如果函数f(x)衰减的比任何逆多项式(inverse polynomial) 更快，那么该函数f(x)是可忽略的(negligible)。例如f(x)=<em>o</em>(n^(-c))，其中c为所有大于0的常数。</li>
+<li>对于两个概率分布X,Y（更准确地说，是），如果对所有的多项式时间算法<em>A</em>（即高效的算法，efficient algorithm），Pr[<em>A</em>(Xλ)] - Pr[<em>A</em>(Yλ)]对于λ是可忽略的。这一渐进处理可以更精确地通过量化运行时间和概率得到具体表现。</li>
+</ol>
+<h3 id="2-2-次高斯分布"><a href="#2-2-次高斯分布" class="headerlink" title="2.2 次高斯分布"></a>2.2 次高斯分布</h3><p>对本文中的误差项采用<strong>次高斯分布</strong>随机向量的标准定义进行分析，类似**[MP12]**中的分析。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">R-LWE</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/04/23/R-LWE%E8%AE%BA%E6%96%87%E2%80%94%E2%80%94Lattice-Cyptography-for-the-internet/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-2021-04-22-高纬度概率及其在数据科学中的应用——第1章" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -753,6 +842,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">密码学</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">R-LWE</a>
               </li>
             
             <div class="clearfix"></div>
