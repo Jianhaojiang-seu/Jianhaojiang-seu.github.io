@@ -152,6 +152,854 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-pandas.DataFrame初始化" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/Jianhaojiang-seu/Jianhaojiang-seu.github.io.git/2021/06/05/pandas.DataFrame%E5%88%9D%E5%A7%8B%E5%8C%96/">pandas.DataFrame初始化</a>
+    </h1>
+  
+
+        
+        <a href="/Jianhaojiang-seu/Jianhaojiang-seu.github.io.git/2021/06/05/pandas.DataFrame%E5%88%9D%E5%A7%8B%E5%8C%96/" class="archive-article-date">
+  	<time datetime="2021-06-05T06:23:53.167Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-06-05</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="pandas-DataFrame"><a href="#pandas-DataFrame" class="headerlink" title="pandas.DataFrame"></a>pandas.DataFrame</h2><h3 id="初始化参数"><a href="#初始化参数" class="headerlink" title="初始化参数"></a>初始化参数</h3><p><strong>data</strong>: <em>ndarray（结构化的或者同一的）, iterable, dict, DataFrame</em></p>
+<p><strong>index</strong>: <em>Index or array-like</em></p>
+<p><strong>columns</strong>: <em>Index or array-like</em></p>
+<p>​        column标签用于生成框架，如果没有提供相关参数，默认范围是(0,1,…,n)</p>
+<p><strong>dtype</strong>: <em>dtype,default None</em></p>
+<h3 id="方法1-通过一维ndarray或列表的字典初始化"><a href="#方法1-通过一维ndarray或列表的字典初始化" class="headerlink" title="方法1 通过一维ndarray或列表的字典初始化"></a>方法1 通过一维ndarray或列表的字典初始化</h3><p>通过data关键字和字典类型进行初始化</p>
+<p>key = 列条目，value = 对应条目的值</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"></span><br><span class="line">pd.DataFrame(data=&#123;<span class="string">&#x27;col1&#x27;</span>: [<span class="string">&#x27;data1&#x27;</span>, <span class="string">&#x27;data2&#x27;</span>, <span class="string">&#x27;data3&#x27;</span>], <span class="string">&#x27;col2&#x27;</span>:[<span class="number">100</span>, <span class="number">200</span>, <span class="number">250</span>]&#125;)</span><br><span class="line"></span><br><span class="line">   col1   col2</span><br><span class="line"><span class="number">0</span>  data1   <span class="number">100</span></span><br><span class="line"><span class="number">1</span>  data2   <span class="number">200</span></span><br><span class="line"><span class="number">2</span>  data3   <span class="number">250</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="方法2-通过二位列表或numpy-ndarray"><a href="#方法2-通过二位列表或numpy-ndarray" class="headerlink" title="方法2 通过二位列表或numpy.ndarray"></a>方法2 通过二位列表或numpy.ndarray</h3><p>通过data=[[a11,a12,a13],[a21,a22,a23]]， columns=[“col1”,”col2”,”col3]</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"></span><br><span class="line">df1=pd.DataFrame(data=[[<span class="string">&quot;zxp&quot;</span>,<span class="string">&quot;student&quot;</span>,<span class="number">26</span>],[<span class="string">&quot;Rjiang&quot;</span>,<span class="string">&quot;teacher&quot;</span>,<span class="string">&quot;50&quot;</span>]], columns=[<span class="string">&quot;name&quot;</span>,<span class="string">&quot;title&quot;</span>,<span class="string">&quot;age&quot;</span>])</span><br><span class="line"></span><br><span class="line">     name    title age</span><br><span class="line"><span class="number">0</span>     zxp  student  <span class="number">26</span></span><br><span class="line"><span class="number">1</span>  Rjiang  teacher  <span class="number">50</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="方法3-通过有结构的ndarray或序列ndarray"><a href="#方法3-通过有结构的ndarray或序列ndarray" class="headerlink" title="方法3 通过有结构的ndarray或序列ndarray"></a>方法3 通过有结构的ndarray或序列ndarray</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">pd.DataFrame(data=np.arange(<span class="number">16</span>).reshape((<span class="number">4</span>,<span class="number">4</span>)), columns=[<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;b&#x27;</span>,<span class="string">&#x27;c&#x27;</span>,<span class="string">&#x27;d&#x27;</span>], index=[<span class="string">&#x27;1&#x27;</span>,<span class="string">&#x27;2&#x27;</span>,<span class="string">&#x27;3&#x27;</span>,<span class="string">&#x27;4&#x27;</span>])</span><br><span class="line"></span><br><span class="line">    a   b   c   d</span><br><span class="line"><span class="number">1</span>   <span class="number">0</span>   <span class="number">1</span>   <span class="number">2</span>   <span class="number">3</span></span><br><span class="line"><span class="number">2</span>   <span class="number">4</span>   <span class="number">5</span>   <span class="number">6</span>   <span class="number">7</span></span><br><span class="line"><span class="number">3</span>   <span class="number">8</span>   <span class="number">9</span>  <span class="number">10</span>  <span class="number">11</span></span><br><span class="line"><span class="number">4</span>  <span class="number">12</span>  <span class="number">13</span>  <span class="number">14</span>  <span class="number">15</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="方法4-通过Dict-of-Series"><a href="#方法4-通过Dict-of-Series" class="headerlink" title="方法4 通过Dict of Series"></a>方法4 通过Dict of Series</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"></span><br><span class="line">se1 = pd.Series([<span class="string">&#x27;apple&#x27;</span>,<span class="string">&#x27;banana&#x27;</span>,<span class="string">&#x27;coffee&#x27;</span>,<span class="string">&#x27;dog&#x27;</span>])</span><br><span class="line">se2 = pd.Series(<span class="built_in">range</span>(<span class="number">4</span>))</span><br><span class="line">dict1 = &#123;<span class="string">&#x27;col1&#x27;</span>:se1, <span class="string">&#x27;col2&#x27;</span>:se2&#125;</span><br><span class="line">pd.DataFrame(data=dict1)</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="方法5-通过另一个DataFrame"><a href="#方法5-通过另一个DataFrame" class="headerlink" title="方法5 通过另一个DataFrame"></a>方法5 通过另一个DataFrame</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"></span><br><span class="line">df1=pd.DataFrame(data=[[<span class="string">&quot;zxp&quot;</span>,<span class="string">&quot;student&quot;</span>,<span class="number">26</span>],[<span class="string">&quot;Rjiang&quot;</span>,<span class="string">&quot;teacher&quot;</span>,<span class="string">&quot;50&quot;</span>]], columns=[<span class="string">&quot;name&quot;</span>,<span class="string">&quot;title&quot;</span>,<span class="string">&quot;age&quot;</span>])</span><br><span class="line"></span><br><span class="line">df2=pd.DataFrame(data=df1)</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="通过文件初始化"><a href="#通过文件初始化" class="headerlink" title="通过文件初始化"></a>通过文件初始化</h2><h3 id="1-通过CSV初始化"><a href="#1-通过CSV初始化" class="headerlink" title="1.通过CSV初始化"></a>1.通过CSV初始化</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line">csv_path = <span class="string">&quot;./test.csv&quot;</span></span><br><span class="line">columns = [<span class="string">&#x27;id&#x27;</span>, <span class="string">&#x27;name&#x27;</span>, <span class="string">&#x27;age&#x27;</span>]</span><br><span class="line">dtype = &#123;<span class="string">&#x27;id&#x27;</span>: <span class="built_in">int</span>, <span class="string">&#x27;name&#x27;</span>: <span class="built_in">object</span>, <span class="string">&#x27;age&#x27;</span>: <span class="built_in">int</span>&#125;</span><br><span class="line">pd.read_csv(csv_path, header=<span class="literal">None</span>, names=columns, dtype=dtype)</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li><p>filepath_or_buffer是最基本的参数，用以指明文件的路径(路径可以是字符串，也可以是各种path对象，详见文档)或者文件对象(也可以接收类文件对象, 即提供read method， 如StringIO对象)。</p>
+<p>另外，这个参数也可以是一个URL，而这个URL可以http, ftp, 或者s3的url。</p>
+</li>
+<li><p>header指定第几行是字段名称，默认值为’infer’，有pandas自动推断。当csv文件中没有字段名称时，自然</p>
+</li>
+<li><p>dtype以字典格式指定对应字段的数据格式，支持部分指定</p>
+</li>
+<li><p>columns通过列表格式指定读取的字段</p>
+</li>
+<li><p>names对字段进行重新命名</p>
+</li>
+<li><p>nrows， 读取文件的指定行数，从header开始</p>
+</li>
+<li><p>usecols, 选定列字段进行读取。</p>
+</li>
+</ol>
+<p>names参数和usecols之间有一些奇怪的关系</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># names参数长度小于表字段数量时，从后向前命名，将所有前面的数值作为一个列表划入最前面的name</span></span><br><span class="line">csv_path = <span class="string">&quot;./history_k_data.csv&quot;</span></span><br><span class="line">df_read_csv = pd.read_csv(csv_path, header=<span class="number">0</span>, nrows=<span class="number">10</span>, names=[<span class="string">&#x27;name1&#x27;</span>,<span class="string">&#x27;name2&#x27;</span>])</span><br><span class="line"><span class="built_in">print</span>(df_read_csv)</span><br><span class="line"></span><br><span class="line">                                                                     name1    name2</span><br><span class="line">sh<span class="number">.600223</span> <span class="number">2021</span>-04-<span class="number">22</span> <span class="number">14.70</span> <span class="number">14.86</span> <span class="number">14.30</span> <span class="number">14.45</span> <span class="number">14.72</span> <span class="number">73111486</span>   <span class="number">1.065595e+09</span>   <span class="number">7.2448</span></span><br><span class="line">          <span class="number">2021</span>-04-<span class="number">23</span> <span class="number">14.67</span> <span class="number">15.12</span> <span class="number">14.11</span> <span class="number">14.68</span> <span class="number">14.45</span> <span class="number">74015247</span>   <span class="number">1.083484e+09</span>   <span class="number">7.3344</span></span><br><span class="line">          <span class="number">2021</span>-04-<span class="number">26</span> <span class="number">14.63</span> <span class="number">16.15</span> <span class="number">14.57</span> <span class="number">15.52</span> <span class="number">14.68</span> <span class="number">107026557</span>  <span class="number">1.682088e+09</span>  <span class="number">10.6056</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(df_read_csv[<span class="string">&#x27;name1&#x27;</span>])</span><br><span class="line">sh<span class="number">.600223</span>  <span class="number">2021</span>-04-<span class="number">22</span>  <span class="number">14.70</span>  <span class="number">14.86</span>  <span class="number">14.30</span>  <span class="number">14.45</span>  <span class="number">14.72</span>  <span class="number">73111486</span>     <span class="number">1.065595e+09</span></span><br><span class="line">           <span class="number">2021</span>-04-<span class="number">23</span>  <span class="number">14.67</span>  <span class="number">15.12</span>  <span class="number">14.11</span>  <span class="number">14.68</span>  <span class="number">14.45</span>  <span class="number">74015247</span>     <span class="number">1.083484e+09</span></span><br><span class="line">           <span class="number">2021</span>-04-<span class="number">26</span>  <span class="number">14.63</span>  <span class="number">16.15</span>  <span class="number">14.57</span>  <span class="number">15.52</span>  <span class="number">14.68</span>  <span class="number">107026557</span>    <span class="number">1.682088e+09</span></span><br><span class="line"></span><br><span class="line">df_read_csv = pd.read_csv(csv_path, dtype=&#123;<span class="string">&#x27;volume&#x27;</span>: <span class="built_in">str</span>&#125;, header=<span class="number">0</span>, nrows=<span class="number">10</span>, </span><br><span class="line">                          names=[<span class="string">&#x27;name1&#x27;</span>,<span class="string">&#x27;name2&#x27;</span>], usecols=[<span class="string">&#x27;name1&#x27;</span>, <span class="string">&#x27;name2&#x27;</span>])</span><br><span class="line"><span class="built_in">print</span>(df_read_csv)</span><br><span class="line"></span><br><span class="line">       name1       name2</span><br><span class="line"><span class="number">0</span>  sh<span class="number">.600223</span>  <span class="number">2021</span>-04-<span class="number">22</span></span><br><span class="line"><span class="number">1</span>  sh<span class="number">.600223</span>  <span class="number">2021</span>-04-<span class="number">23</span></span><br><span class="line"><span class="number">2</span>  sh<span class="number">.600223</span>  <span class="number">2021</span>-04-<span class="number">26</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(df_read_csv[<span class="string">&#x27;name2&#x27;</span>])</span><br><span class="line"></span><br><span class="line"><span class="number">0</span>    <span class="number">2021</span>-04-<span class="number">22</span></span><br><span class="line"><span class="number">1</span>    <span class="number">2021</span>-04-<span class="number">23</span></span><br><span class="line"><span class="number">2</span>    <span class="number">2021</span>-04-<span class="number">26</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/Jianhaojiang-seu/Jianhaojiang-seu.github.io.git/2021/06/05/pandas.DataFrame%E5%88%9D%E5%A7%8B%E5%8C%96/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-日语语法框架" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/Jianhaojiang-seu/Jianhaojiang-seu.github.io.git/2021/05/28/%E6%97%A5%E8%AF%AD%E8%AF%AD%E6%B3%95%E6%A1%86%E6%9E%B6/">日语语法框架</a>
+    </h1>
+  
+
+        
+        <a href="/Jianhaojiang-seu/Jianhaojiang-seu.github.io.git/2021/05/28/%E6%97%A5%E8%AF%AD%E8%AF%AD%E6%B3%95%E6%A1%86%E6%9E%B6/" class="archive-article-date">
+  	<time datetime="2021-05-28T01:37:31.374Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-05-28</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="日语语法作用——造句"><a href="#日语语法作用——造句" class="headerlink" title="日语语法作用——造句"></a>日语语法作用——造句</h1><p>名词谓语句</p>
+<p>谓语：对主语动作状态或特征的陈述和说明</p>
+<p>何々は何々です</p>
+<p>李さんは中国人です</p>
+<h3 id="日语中只有四种词语能够作为谓语——名词、形容词、形容动词和动词"><a href="#日语中只有四种词语能够作为谓语——名词、形容词、形容动词和动词" class="headerlink" title="日语中只有四种词语能够作为谓语——名词、形容词、形容动词和动词"></a>日语中只有四种词语能够作为谓语——名词、形容词、形容动词和动词</h3><p>名词 　　　　李さんは中国人です。</p>
+<p>形容词　　　李さんは高いです。</p>
+<p>形容动词　　李さんは有名です。</p>
+<p>动词　　　　李さんは七時に起きます。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Language</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">日本语</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/Jianhaojiang-seu/Jianhaojiang-seu.github.io.git/categories/日本语//" class="article-tag-list-link color4">日本语</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/Jianhaojiang-seu/Jianhaojiang-seu.github.io.git/2021/05/28/%E6%97%A5%E8%AF%AD%E8%AF%AD%E6%B3%95%E6%A1%86%E6%9E%B6/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-P,NP,NPC问题与复杂度归约" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/Jianhaojiang-seu/Jianhaojiang-seu.github.io.git/2021/05/16/P,NP,NPC%E9%97%AE%E9%A2%98%E4%B8%8E%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%BD%92%E7%BA%A6/">P,NP,NPC问题与复杂度归约</a>
+    </h1>
+  
+
+        
+        <a href="/Jianhaojiang-seu/Jianhaojiang-seu.github.io.git/2021/05/16/P,NP,NPC%E9%97%AE%E9%A2%98%E4%B8%8E%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%BD%92%E7%BA%A6/" class="archive-article-date">
+  	<time datetime="2021-05-16T03:23:03.806Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-05-16</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>转载自matrix67</p>
+<h1 id="什么是P问题、NP问题和NPC问题"><a href="#什么是P问题、NP问题和NPC问题" class="headerlink" title="什么是P问题、NP问题和NPC问题"></a>什么是P问题、NP问题和NPC问题</h1><p>  这或许是众多OIer最大的误区之一。<br>  你会经常看到网上出现“这怎么做，这不是NP问题吗”、“这个只有搜了，这已经被证明是NP问题了”之类的话。你要知道，大多数人此时所说的NP问题其实都是指的NPC问题。他们没有搞清楚NP问题和NPC问题的概念。NP问题并不是那种“只有搜才行”的问题，NPC问题才是。好，行了，基本上这个误解已经被澄清了。下面的内容都是在讲什么是P问题，什么是NP问题，什么是NPC问题，你如果不是很感兴趣就可以不看了。接下来你可以看到，把NP问题当成是 NPC问题是一个多大的错误。</p>
+<p>  还是先用几句话简单说明一下时间复杂度。时间复杂度并不是表示一个程序解决问题需要花多少时间，而是当问题规模扩大后，程序需要的时间长度增长得有多快。也就是说，对于高速处理数据的计算机来说，处理某一个特定数据的效率不能衡量一个程序的好坏，而应该看当这个数据的规模变大到数百倍后，程序运行时间是否还是一样，或者也跟着慢了数百倍，或者变慢了数万倍。不管数据有多大，程序处理花的时间始终是那么多的，我们就说这个程序很好，具有O(1)的时间复杂度，也称常数级复杂度；数据规模变得有多大，花的时间也跟着变得有多长，这个程序的时间复杂度就是O(n)，比如找n个数中的最大值；而像冒泡排序、插入排序等，数据扩大2倍，时间变慢4倍的，属于O(n^2)的复杂度。还有一些穷举类的算法，所需时间长度成几何阶数上涨，这就是O(a^n)的指数级复杂度，甚至O(n!)的阶乘级复杂度。不会存在O(2<em>n^2)的复杂度，因为前面的那个“2”是系数，根本不会影响到整个程序的时间增长。同样地，O (n^3+n^2)的复杂度也就是O(n^3)的复杂度。因此，我们会说，一个O(0.01</em>n^3)的程序的效率比O(100*n^2)的效率低，尽管在n很小的时候，前者优于后者，但后者时间随数据规模增长得慢，最终O(n^3)的复杂度将远远超过O(n^2)。我们也说，O(n^100)的复杂度小于O(1.01^n)的复杂度。<br>  容易看出，前面的几类复杂度被分为两种级别，其中后者的复杂度无论如何都远远大于前者：一种是O(1),O(log(n)),O(n^a)等，我们把它叫做多项式级的复杂度，因为它的规模n出现在底数的位置；另一种是O(a^n)和O(n!)型复杂度，它是非多项式级的，其复杂度计算机往往不能承受。当我们在解决一个问题时，我们选择的算法通常都需要是多项式级的复杂度，非多项式级的复杂度需要的时间太多，往往会超时，除非是数据规模非常小。</p>
+<p>  自然地，人们会想到一个问题：会不会所有的问题都可以找到复杂度为多项式级的算法呢？很遗憾，答案是否定的。有些问题甚至根本不可能找到一个正确的算法来，这称之为“不可解问题”(Undecidable Decision Problem)。<a target="_blank" rel="noopener" href="http://www.matrix67.com/blog/article.asp?id=62">The Halting Problem</a>就是一个著名的不可解问题，在我的Blog上有过专门的介绍和证明。再比如，输出从1到n这n个数的全排列。不管你用什么方法，你的复杂度都是阶乘级，因为你总得用阶乘级的时间打印出结果来。有人说，这样的“问题”不是一个“正规”的问题，正规的问题是让程序解决一个问题，输出一个“YES”或“NO”（这被称为判定性问题），或者一个什么什么的最优值（这被称为最优化问题）。那么，根据这个定义，我也能举出一个不大可能会有多项式级算法的问题来：Hamilton回路。问题是这样的：给你一个图，问你能否找到一条经过每个顶点一次且恰好一次（不遗漏也不重复）最后又走回来的路（满足这个条件的路径叫做Hamilton回路）。这个问题现在还没有找到多项式级的算法。事实上，这个问题就是我们后面要说的NPC问题。</p>
+<p>  下面引入P类问题的概念：如果一个问题可以找到一个能在多项式的时间里解决它的算法，那么这个问题就属于P问题。P是英文单词多项式的第一个字母。哪些问题是P类问题呢？通常NOI和NOIP不会出不属于P类问题的题目。我们常见到的一些信息奥赛的题目都是P问题。道理很简单，一个用穷举换来的非多项式级时间的超时程序不会涵盖任何有价值的算法。<br>  接下来引入NP问题的概念。这个就有点难理解了，或者说容易理解错误。在这里强调（回到我竭力想澄清的误区上），<strong>NP问题不是非P类问题</strong>。<strong>NP问题是指可以在多项式的时间里验证一个解的问题</strong>。NP问题的另一个定义是，<strong>可以在多项式的时间里猜出一个解的问题</strong>。比方说，我RP很好，在程序中需要枚举时，我可以一猜一个准。现在某人拿到了一个求最短路径的问题，问从起点到终点是否有一条小于100个单位长度的路线。它根据数据画好了图，但怎么也算不出来，于是来问我：你看怎么选条路走得最少？我说，我RP很好，肯定能随便给你指条很短的路出来。然后我就胡乱画了几条线，说就这条吧。那人按我指的这条把权值加起来一看，嘿，神了，路径长度98，比100小。于是答案出来了，存在比100小的路径。别人会问他这题怎么做出来的，他就可以说，因为我找到了一个比100 小的解。在这个题中，找一个解很困难，但验证一个解很容易。验证一个解只需要O(n)的时间复杂度，也就是说我可以花O(n)的时间把我猜的路径的长度加出来。那么，只要我RP好，猜得准，我一定能在多项式的时间里解决这个问题。我猜到的方案总是最优的，不满足题意的方案也不会来骗我去选它。这就是NP问题。当然有不是NP问题的问题，即你猜到了解但是没用，因为你不能在多项式的时间里去验证它。下面我要举的例子是一个经典的例子，它指出了一个目前还没有办法在多项式的时间里验证一个解的问题。很显然，前面所说的Hamilton回路是NP问题，因为验证一条路是否恰好经过了每一个顶点非常容易。但我要把问题换成这样：试问一个图中是否不存在Hamilton回路。这样问题就没法在多项式的时间里进行验证了，因为除非你试过所有的路，否则你不敢断定它“没有Hamilton回路”。<br>  之所以要定义NP问题，是因为通常只有NP问题才可能找到多项式的算法。我们不会指望一个连多项式地验证一个解都不行的问题存在一个解决它的多项式级的算法。相信读者很快明白，信息学中的号称最困难的问题——“NP问题”，实际上是在探讨NP问题与P类问题的关系。</p>
+<p>​    很显然，所有的P类问题都是NP问题。也就是说，能多项式地解决一个问题，必然能多项式地验证一个问题的解——既然正解都出来了，验证任意给定的解也只需要比较一下就可以了。关键是，人们想知道，是否所有的NP问题都是P类问题。我们可以再用集合的观点来说明。如果把所有P类问题归为一个集合P中，把所有 NP问题划进另一个集合NP中，那么，显然有P属于NP。现在，所有对NP问题的研究都集中在一个问题上，即究竟是否有P=NP？通常所谓的“NP问题”，其实就一句话：证明或推翻P=NP。<br>​    NP问题一直都是信息学的巅峰。巅峰，意即很引人注目但难以解决。在信息学研究中，这是一个耗费了很多时间和精力也没有解决的终极问<br>题，好比物理学中的大统一和数学中的歌德巴赫猜想等。<br>​    目前为止这个问题还“啃不动”。但是，一个总的趋势、一个大方向是有的。人们普遍认为，P=NP不成立，也就是说，多数人相信，存在至少一个不可能有多项式级复杂度的算法的NP问题。人们如此坚信P≠NP是有原因的，就是在研究NP问题的过程中找出了一类非常特殊的NP问题叫做NP-完全问题，也即所谓的 NPC问题。C是英文单词“完全”的第一个字母。正是NPC问题的存在，使人们相信P≠NP。下文将花大量篇幅介绍NPC问题，你从中可以体会到NPC问题使P=NP变得多么不可思议。</p>
+<h2 id="归约概念Reducibility"><a href="#归约概念Reducibility" class="headerlink" title="归约概念Reducibility"></a>归约概念Reducibility</h2><p>​    为了说明NPC问题，我们先引入一个概念——约化(Reducibility，有的资料上叫“归约”)。<br>​    简单地说，<strong>一个问题A可以约化为问题B的含义即是，可以用问题B的解法解决问题A</strong>，或者说，问题A可以“变成”问题B。《算法导论》上举了这么一个例子。比如说，现在有两个问题：<strong>求解一个一元一次方程和求解一个一元二次方程。那么我们说，前者可以约化为后者</strong>，意即知道如何解一个一元二次方程那么一定能解出一元一次方程。我们可以写出两个程序分别对应两个问题，那么我们能找到一个“规则”，按照这个规则把解一元一次方程程序的输入数据变一下，用在解一元二次方程的程序上，两个程序总能得到一样的结果。这个规则即是：两个方程的对应项系数不变，一元二次方程的二次项系数为0。按照这个规则把前一个问题转换成后一个问题，两个问题就等价了。同样地，我们可以说，Hamilton回路可以约化为TSP问题(Travelling Salesman Problem，旅行商问题)：在Hamilton回路问题中，两点相连即这两点距离为0，两点不直接相连则令其距离为1，于是问题转化为在TSP问题中，是否存在一条长为0的路径。Hamilton回路存在当且仅当TSP问题中存在长为0的回路。<br>   <strong>“问题A可约化为问题B”有一个重要的直观意义：B的时间复杂度高于或者等于A的时间复杂度</strong>。也就是说，问题A不比问题B难。这很容易理解。既然问题A能用问题B来解决，倘若B的时间复杂度比A的时间复杂度还低了，那A的算法就可以改进为B的算法，两者的时间复杂度还是相同。正如解一元二次方程比解一元一次方程难，因为解决前者的方法可以用来解决后者。<br>  很显然，约化具有一项重要的性质：约化具有传递性。如果问题A可约化为问题B，问题B可约化为问题C，则问题A一定可约化为问题C。这个道理非常简单，就不必阐述了。<br>  现在再来说一下约化的标准概念就不难理解了：如果能找到这样一个变化法则，对任意一个程序A的输入，都能按这个法则变换成程序B的输入，使两程序的输出相同，那么我们说，问题A可约化为问题B。<br>  当然，我们所说的“可约化”是指的可“多项式地”约化(Polynomial-time Reducible)，即变换输入的方法是能在多项式的时间里完成的。约化的过程只有用多项式的时间完成才有意义。</p>
+<p>  好了，从约化的定义中我们看到，一个问题约化为另一个问题，时间复杂度增加了，问题的应用范围也增大了。通过对某些问题的不断约化，我们能够不断寻找复杂度更高，但应用范围更广的算法来代替复杂度虽然低，但只能用于很小的一类问题的算法。再回想前面讲的P和NP问题，联想起约化的传递性，自然地，我们会想问，如果不断地约化上去，不断找到能“通吃”若干小NP问题的一个稍复杂的大NP问题，那么最后是否有可能找到一个时间复杂度最高，并且能“通吃”所有的 NP问题的这样一个超级NP问题？答案居然是肯定的。也就是说，存在这样一个NP问题，所有的NP问题都可以约化成它。换句话说，只要解决了这个问题，那么所有的NP问题都解决了。这种问题的存在难以置信，并且更加不可思议的是，这种问题不只一个，它有很多个，它是一类问题。这一类问题就是传说中的NPC 问题，也就是NP-完全问题。NPC问题的出现使整个NP问题的研究得到了飞跃式的发展。我们有理由相信，NPC问题是最复杂的问题。再次回到全文开头，我们可以看到，人们想表达一个问题不存在多项式的高效算法时应该说它“属于NPC问题”。此时，我的目的终于达到了，我已经把NP问题和NPC问题区别开了。到此为止，本文已经写了近5000字了，我佩服你还能看到这里来，同时也佩服一下自己能写到这里来。</p>
+<p>  NPC问题的定义非常简单。同时满足下面两个条件的问题就是NPC问题。首先，它得是一个NP问题；然后，所有的NP问题都可以约化到它。证明一个问题是 NPC问题也很简单。先证明它至少是一个NP问题，再证明其中一个已知的NPC问题能约化到它（由约化的传递性，则NPC问题定义的第二条也得以满足；至于第一个NPC问题是怎么来的，下文将介绍），这样就可以说它是NPC问题了。<br>  既然所有的NP问题都能约化成NPC问题，那么只要任意一个NPC问题找到了一个多项式的算法，那么所有的NP问题都能用这个算法解决了，NP也就等于P 了。因此，给NPC找一个多项式算法太不可思议了。因此，前文才说，“正是NPC问题的存在，使人们相信P≠NP”。我们可以就此直观地理解，NPC问题目前没有多项式的有效算法，只能用指数级甚至阶乘级复杂度的搜索。</p>
+<p>  顺便讲一下NP-Hard问题。NP-Hard问题是这样一种问题，它满足NPC问题定义的第二条但不一定要满足第一条（就是说，NP-Hard问题要比 NPC问题的范围广）。NP-Hard问题同样难以找到多项式的算法，但它不列入我们的研究范围，因为它不一定是NP问题。即使NPC问题发现了多项式级的算法，NP-Hard问题有可能仍然无法得到多项式级的算法。事实上，由于NP-Hard放宽了限定条件，它将有可能比所有的NPC问题的时间复杂度更高从而更难以解决。</p>
+<p>  不要以为NPC问题是一纸空谈。NPC问题是存在的。确实有这么一个非常具体的问题属于NPC问题。下文即将介绍它。<br>  下文即将介绍逻辑电路问题。这是第一个NPC问题。其它的NPC问题都是由这个问题约化而来的。因此，逻辑电路问题是NPC类问题的“鼻祖”。<br>  逻辑电路问题是指的这样一个问题：给定一个逻辑电路，问是否存在一种输入使输出为True。<br>  什么叫做逻辑电路呢？一个逻辑电路由若干个输入，一个输出，若干“逻辑门”和密密麻麻的线组成。看下面一例，不需要解释你马上就明白了。<br> ┌───┐<br> │ 输入1├─→┐         ┌──┐<br> └───┘             └─→┤         │<br>                                │ or ├→─┐<br> ┌───┐        ┌─→┤            │      │  ┌──┐<br> │ 输入2├─→┤               └──┘  └─→┤  │<br> &amp;<br>nbsp;└───┘  │        ┌─→┤AND ├──→输出<br>        └────────┘┌→┤  │<br> ┌───┐  ┌──┐      │ └──┘<br> │ 输入3├─→┤ NOT├─→────┘<br> └───┘  └──┘<br>  这是个较简单的逻辑电路，当输入1、输入2、输入3分别为True、True、False或False、True、False时，输出为True。<br>  有输出无论如何都不可能为True的逻辑电路吗？有。下面就是一个简单的例子。<br> ┌───┐<br> │输入1 ├→─┐  ┌──┐<br> └───┘  └─→┤  │<br>           │AND ├─→┐<br>        ┌─→┤  │  │<br>        │  └──┘  │ ┌──┐<br>        │        └→┤  │<br> ┌───┐  │          │AND ├─→输出<br> │输入2 ├→─┤ ┌──┐   ┌→┤  │<br> └───┘  └→┤NOT ├→──┘ └──┘<br>          └──┘<br>  上面这个逻辑电路中，无论输入是什么，输出都是False。我们就说，这个逻辑电路不存在使输出为True的一组输入。<br>  回到上文，给定一个逻辑电路，问是否存在一种输入使输出为True，这即逻辑电路问题。<br>  逻辑电路问题属于NPC问题。这是有严格证明的。它显然属于NP问题，并且可以直接证明所有的NP问题都可以约化到它（不要以为NP问题有无穷多个将给证明造成不可逾越的困难）。证明过程相当复杂，其大概意思是说任意一个NP问题的输入和输出都可以转换成逻辑电路的输入和输出（想想计算机内部也不过是一些 0和1的运算），因此对于一个NP问题来说，问题转化为了求出满足结果为True的一个输入（即一个可行解）。</p>
+<p>  有了第一个NPC问题后，一大堆NPC问题就出现了，因为再证明一个新的NPC问题只需要将一个已知的NPC问题约化到它就行了。后来，Hamilton 回路成了NPC问题，TSP问题也成了NPC问题。现在被证明是NPC问题的有很多，任何一个找到了多项式算法的话所有的NP问题都可以完美解决了。因此说，正是因为NPC问题的存在，P=NP变得难以置信。P=NP问题还有许多有趣的东西，有待大家自己进一步的挖掘。攀登这个信息学的巅峰是我们这一代的终极目标。现在我们需要做的，至少是不要把概念弄混淆了。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">complexity</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/Jianhaojiang-seu/Jianhaojiang-seu.github.io.git/2021/05/16/P,NP,NPC%E9%97%AE%E9%A2%98%E4%B8%8E%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%BD%92%E7%BA%A6/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-BIU2012-Introduction-of-Lattice-by-Regev" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/Jianhaojiang-seu/Jianhaojiang-seu.github.io.git/2021/05/15/BIU2012-Introduction-of-Lattice-by-Regev/">BIU2012 Introduction of Lattice by Regev</a>
+    </h1>
+  
+
+        
+        <a href="/Jianhaojiang-seu/Jianhaojiang-seu.github.io.git/2021/05/15/BIU2012-Introduction-of-Lattice-by-Regev/" class="archive-article-date">
+  	<time datetime="2021-05-15T03:59:37.226Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-05-15</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="History"><a href="#History" class="headerlink" title="History"></a>History</h1><p>Gauss Hermite, Minkowski 从数论角度研究格这一具有丰富数学结构的概念。</p>
+<h3 id="LLL-algorithm-approximate-the-shortest-vector-in-a-lattice"><a href="#LLL-algorithm-approximate-the-shortest-vector-in-a-lattice" class="headerlink" title="LLL algorithm - approximate the shortest vector in a lattice"></a>LLL algorithm - approximate the shortest vector in a lattice</h3><ol>
+<li>factory rational polynomials</li>
+<li>soling integer programs in a fixed dimension</li>
+<li>find integer relations:  exp6.73205080 = $\sqrt 3 + 5$</li>
+</ol>
+<p>LLL algorithm can be used as a cryptanalysis tool .</p>
+<p>​    -Knapsack-based cryptosystem</p>
+<p>​    -Variants of RSA</p>
+<h2 id="Equivalent-Basis"><a href="#Equivalent-Basis" class="headerlink" title="Equivalent Basis"></a>Equivalent Basis</h2><p>判断两个基生成相同的格，可以通过：</p>
+<ol>
+<li>交换基向量</li>
+<li>改变基向量符号</li>
+<li>将一个基向量的整数倍加到另一个基向量上</li>
+</ol>
+<p>从数学角度来说，这些操作可以总结为将格基右乘一个幺模矩阵（unimodular matrix) U， 行列式为1的$\pm1$的矩阵</p>
+<p>幺模矩阵对于矩阵乘法是封闭的，并且幺模矩阵的逆同样是幺模矩阵（这也是其的一种定义）</p>
+<h2 id="Periodic-Function-on-R"><a href="#Periodic-Function-on-R" class="headerlink" title="Periodic Function on R"></a>Periodic Function on R</h2><p>对于R上的周期函数，我们可以通过一个周期内的函数值对其进行描述。例如一个周期为$2\pi$的函数，仅需要存储$[0,2\pi)$内的值，并且对$x$计算$(f(x \text mod2\pi))$即可。</p>
+<p>而对于高维空间内，从数学角度上将more confusing. 基本思想是存储一个陪集（coset）内的函数值(of each coset, of each shift of $2\pi$)。在二维空间中，周期变为一个平面，通过平移同样可以实现类似一维空间的效果。与一维周期函数相同，二位周期由很多种选取方法，其形状不会影响格的性质。</p>
+<h2 id="Fundamental-Parallelepiped"><a href="#Fundamental-Parallelepiped" class="headerlink" title="Fundamental Parallelepiped"></a>Fundamental Parallelepiped</h2><p>平行多面体是分析格点关系的一种工具，可以通过平行多面体来描述Funamental Region。每个基本区域内只包含一个格点，将他们拼接起来可以得到整个平面。根据定义，基本区域的体积(volumn)是相等的。</p>
+<h2 id="Determinant"><a href="#Determinant" class="headerlink" title="Determinant"></a>Determinant</h2><p>格的行列式是基本区域的体积，可以标识个点的密度，定义为格基矩阵行列式的绝对值，$\text{det}(\text L):=|\text{det}(\text B)|$。由于格基的取值由很多种，为了使这个定义有意义，每个格基的行列式应该相等。由于不同格基可以通过幺模矩阵转化$\text B_1=\text B_2 \text U $，因此$|\text{det}(\text {B}_1 \text U)|=|\text{det}\text B_1||\text {detU}|$。</p>
+<p>格的行列式作为标量定义格的性质，预期。</p>
+<h2 id="Minkowski’s-Theorem"><a href="#Minkowski’s-Theorem" class="headerlink" title="Minkowski’s Theorem"></a>Minkowski’s Theorem</h2><p>推论1. 对于任意格$\Lambda$，$\lambda_1(\Lambda)\leq \sqrt n \cdot \text det(\Lambda)^{1\over n}$.</p>
+<p>上式中等号右边的$1\over n$是由于格基行列式的原因，如果把格基扩大k倍，那么行列式将扩大$k^n$倍。</p>
+<p>而系数$\sqrt n$则是值得研究的部分，实际上可以将系数优化为$c\cdot \sqrt n$，其中$c&lt;1$。</p>
+<p>由此可知，对于任意行列式为1的格$\text L(\text B)$，其必含有一个长度小于等于$\sqrt n$的最短向量。那么，对于一个半径为$\sqrt n$的n维度球体，一定包含格$\text L(\text B)$的一个格点。（半径为$\sqrt n$的球体包含一个每个维度范围为$[-1,1]$的n维方盒，该方盒体积为$2^n$，因此半径为$\sqrt n$的球体的体积大于$2^n$。</p>
+<h2 id="Summary-of-Known-Results"><a href="#Summary-of-Known-Results" class="headerlink" title="Summary of Known Results"></a>Summary of Known Results</h2><p>Many of us thought it should not be so hard to solve Lattice probelm, but reserchers has been put great efforts on these kind of problem.</p>
+<h3 id="LLL-algorihtm-1982"><a href="#LLL-algorihtm-1982" class="headerlink" title="LLL algorihtm 1982"></a>LLL algorihtm 1982</h3><p>The algorithm run polynomial time, but the result of shortest problem has exponential approximate factor to the shortest problem. In another words, the algorithm only produce very mild short vectors, the precise approximate factor is essentially $2^n$. When in high dimensional space, such dim=500, the algorithm produce a very bad results.</p>
+<p>由于难以找到复杂度抵御$2^n$的方法，目前最好的算法复杂度可能是亚指数的，例如$2^\sqrt n$。</p>
+<h3 id="问题困难性"><a href="#问题困难性" class="headerlink" title="问题困难性"></a>问题困难性</h3><p>近似$\text {SVP}_\gamma$问题的近似因子决定了问题的困难性。</p>
+<p>$\gamma \in [1,n^{c/ \text {loglog}n}]$时，属于NP困难问题。</p>
+<p>$\gamma \in [\sqrt n,2^{n\text{loglog}n/ \text logn}]$时，困难性介于NP困难问题和coNP困难问题。</p>
+<p>$\gamma &gt; 2^{n\text{loglog}n/ \text{logn}} $时，属于P类问题。</p>
+<p>密码学所依赖的为近似因子$\gamma$为介于$[n,n^2]$的$\text {SVP}_\gamma$问题。因此，加密方案实际上是建立$NP \bigcap coNP$问题而非NP困难问题，因为NP困难问题有很多限制条件。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">lattices</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/Jianhaojiang-seu/Jianhaojiang-seu.github.io.git/2021/05/15/BIU2012-Introduction-of-Lattice-by-Regev/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-CIS2019-P.Q.Nguyen-Speech" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/Jianhaojiang-seu/Jianhaojiang-seu.github.io.git/2021/05/13/CIS2019-P.Q.Nguyen-Speech/">CIS2019 P.Q.Nguyen Speech</a>
+    </h1>
+  
+
+        
+        <a href="/Jianhaojiang-seu/Jianhaojiang-seu.github.io.git/2021/05/13/CIS2019-P.Q.Nguyen-Speech/" class="archive-article-date">
+  	<time datetime="2021-05-13T08:51:14.300Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-05-13</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>[Regev05]: 如果能够在平均情况下解决$G=(Z/q_\text nZ)^\text n$中的LWE问题，那么就可以通过量子算法高效的在每个n维格中找到最短向量。</p>
+<p>[GINX16]：该结论可以被推广到有限阿贝尔群的任意序列$(G_\text n)$中，在#$G_\text n$足够大的前提下。</p>
+<p>say about ring picks, a very nice complexity statements, in term of efficiency, it is not that great, From the late 90s, people start to wonder can we make some tradeoff, between  and situate. NTRU use special lattices to realize better efficiency, yet stronger hardness assumption. [Mi02] can obtain ‘restricted’ worst-case to average-case reductions. <strong>The worst-case now refers to a special lattice, e.g. ideal lattices</strong>.</p>
+<p>M-SIS: SIS over Modules</p>
+<p>令$M$是环R中(而非$Z$中)的一个R-模(R-Module)：$R=Z$ in SIS. 均匀随机地选择$g_1,g_2\ldots g_m \in M$</p>
+<p>Words: We can pick the uniform distribution, we can choose our modular element uniformly at random. And now the generalized problem to be instead of finding short integers, we are going to find short ring elements, such that sum of  $x_i g_i$ equals to 0.</p>
+<p>$x_i$ is a ring element, $g_i$ is  a module elements as we chose. </p>
+<p>Now if we choose our Ring $R$ such that R to the m is a lattice, and again this modular problem can be view as find a short vector of som random (module) sublattice of R to the m.</p>
+<p>So that’s why NTRU use for the special case m=2, only 2 elements $(g_1,g_2)\in R^2$, and ring was a polynomial ring, integer polynomials, divided to X to the N minus 1. And M was integer polynomial divided q, X to the m minus 1, but $g_1$ is public key, $g_2=-1$</p>
+<h2 id="LLL-algorithm"><a href="#LLL-algorithm" class="headerlink" title="LLL algorithm"></a>LLL algorithm</h2><h3 id="key-ideas-Reduce-the-lattice-by-quotient"><a href="#key-ideas-Reduce-the-lattice-by-quotient" class="headerlink" title="key ideas: Reduce the lattice by quotient"></a>key ideas: Reduce the lattice by quotient</h3><ol>
+<li>projections never increase norms: if $||\text v|| \leq \text R$, then $||\text v \text mod \text L_i|| \leq \text R$.</li>
+<li>$\text L/\text L_j$is a lower-rank lattice whose short vectors can be lifted into short vectors of $\text L/ \text L_i$ if $i&lt;j$.</li>
+</ol>
+<p>So the algorithm is with 2 steps：</p>
+<p>A. reduce a basis</p>
+<p>B. Exhaustive search all vectors shorter than norm $\text R$ by enumerating all short vectors in 1-rank $\text L / \text L_{d-1}$, then 2 rank $\text L / \text L_{d-2}$, etc.</p>
+<p>usually <strong>SETP B IS MORE EXPENSIVE than STEP A</strong>.</p>
+<p>if the basis is <strong>LLL-reduced</strong>, STEP B costs $2^{O(d^2)}$.</p>
+<h2 id="Mathematic-Analogy"><a href="#Mathematic-Analogy" class="headerlink" title="Mathematic Analogy"></a>Mathematic Analogy</h2><p>如果证明k维格中存在一个短向量，那么是否可以在更高维度的格中证明存在一个短向量？</p>
+<h3 id="Modell’s-Inequality-1994"><a href="#Modell’s-Inequality-1994" class="headerlink" title="Modell’s Inequality[1994]"></a>Modell’s Inequality[1994]</h3><h2 id="Random-Lattice-and-Average-Case-Behavior"><a href="#Random-Lattice-and-Average-Case-Behavior" class="headerlink" title="Random Lattice and Average-Case Behavior"></a>Random Lattice and Average-Case Behavior</h2><p>words: we don’t want just Worst-Case, we want to know what happen in practice. People has been plan with these blockwise algorithms in terms of practice, doesn’t seem to make much difference, all these strategies, despite different theoretical bounds.</p>
+<p>The old BKZ algorithm is widely used in lattice record computations.</p>
+<h2 id="Security-Estimates"><a href="#Security-Estimates" class="headerlink" title="Security Estimates"></a>Security Estimates</h2><p>LLL algorithm and BKZ algorithm has gap between theory and practice</p>
+<h1 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h1><h2 id="Lattice-Reduction"><a href="#Lattice-Reduction" class="headerlink" title="Lattice Reduction"></a>Lattice Reduction</h2><p>Lattice Reduction, the theory of showing the existence of nice basis, was introduced to prove the first inequlities on lattice invariants </p>
+<h1 id="QA"><a href="#QA" class="headerlink" title="QA"></a>QA</h1><ol>
+<li><p>fully homomorphically encryption</p>
+</li>
+<li><p>Q: Algorithm taking more memories but less time? (Is there any unification of enumeration sieving?)</p>
+<p>A:  it’s a very natural question.</p>
+</li>
+<li></li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Lattice</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/Jianhaojiang-seu/Jianhaojiang-seu.github.io.git/2021/05/13/CIS2019-P.Q.Nguyen-Speech/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-GVP08,MP12,DM18中的格基陷门函数" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/Jianhaojiang-seu/Jianhaojiang-seu.github.io.git/2021/05/11/GVP08,MP12,DM18%E4%B8%AD%E7%9A%84%E6%A0%BC%E5%9F%BA%E9%99%B7%E9%97%A8%E5%87%BD%E6%95%B0/">GVP08,MP12,DM18中的格基陷门函数</a>
+    </h1>
+  
+
+        
+        <a href="/Jianhaojiang-seu/Jianhaojiang-seu.github.io.git/2021/05/11/GVP08,MP12,DM18%E4%B8%AD%E7%9A%84%E6%A0%BC%E5%9F%BA%E9%99%B7%E9%97%A8%E5%87%BD%E6%95%B0/" class="archive-article-date">
+  	<time datetime="2021-05-11T05:49:01.709Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-05-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="格基陷门"><a href="#格基陷门" class="headerlink" title="格基陷门"></a>格基陷门</h1><h2 id="原象采样陷门函数"><a href="#原象采样陷门函数" class="headerlink" title="原象采样陷门函数"></a>原象采样陷门函数</h2><p>GVP08提出了一个带有原象采样的抗碰撞hash函数，通过$TrapGen,SampleDom,SamplePre$三个概率多项式时间算法组成。</p>
+<ol>
+<li>生成带陷门的函数：$TrapGen(1^n)$生成$(a,t)$，其中$a$是对可计算函数$f_a:D_n\rightarrow R_n$ （$D_n$和$R_n$分别是可快速辨认的定义域和值域），$t$是与函数$f_a$相关的陷门信息。</li>
+<li>域采样和均匀输出：$SampleDom(1^n)$从$D_n$中某个（可能并非均匀的）分布中采样$x$，使得$f_a(x)$在$R_n$上均匀分布。</li>
+<li>生成带有陷门的原象采样：对于任意$y\in R_n$并给定$f_a(x)=y$，算法$SamplePre(t,y)$在条件分布$x\leftarrow Sample(1^n)$下进行采样。</li>
+</ol>
+<h2 id="高斯采样"><a href="#高斯采样" class="headerlink" title="高斯采样"></a>高斯采样</h2><p>高斯采样是格基陷门函数中的效率瓶颈。Micciancio&amp;Peikert在MP12中提设计了一个特制的SIS采样算法，分为<strong>线上和线下</strong>两个阶段。该算法优化了<strong>模数q为2的幂时</strong>的采样效率，并且相对位数k具有现行复杂度。然而，对于任意模数q，该算法效率退化到GVP08中提出的采样算法效率。</p>
+<p>DM18对MP12算法的<strong>线上阶段</strong>进行了优化，并提出了对任意模数q的采样算法，新算法具有O(n)的空间复杂度，与$q=2^k$条件下的MP12算法相近。</p>
+<h4 id="整数采样x"><a href="#整数采样x" class="headerlink" title="整数采样x"></a>整数采样x</h4><p>首先定义整数上的采样算法$Sample\Z$ ，该算法从1维整数格上的离散高斯分布$D_{\Z,s,c}$中进行采样。给定一个固定的函数$t(n)\geq O(\sqrt{\log n})$，例如$t(n)=\log n$， 算法进行如下的拒绝采样：</p>
+<p>输入$(s,c)$和安全参数$n$，均匀随机地选择整数$x\leftarrow Z=\Z\bigcap [c-s\cdot t(n),c+s\cdot t(n)]$。随后以概率$\rho_s(x-c)\in (0.1]$输出$x$，否则重复采样。</p>
+<h4 id="从任意格中采样"><a href="#从任意格中采样" class="headerlink" title="从任意格中采样"></a>从任意格中采样</h4><p>GVP08提出了一个随机化的最近平面算法$Sample\text D$，该算法从任意格$\Lambda$上的离散高斯分布$D_{ \Lambda,s,c}$中进行采样。我们基于一个预言机在离散高斯分布$D_{\Z,s’,c’}$（其中$s’&gt;0,c’&gt;\R$）进行采样的预言机，描述算法$Sample\text D$ :</p>
+<ol>
+<li>令$\bold {v}_n \leftarrow 0$ ，$\bold{c}_n \leftarrow \bold{c}$，对于$i \leftarrow n\ldots1$，计算<br>a. 计算$c’_i=\langle \bold c_i,\widetilde {\bold {b}}<em>i \rangle / \widetilde {\bold {b}}<em>i,\widetilde {\bold {b}}<em>i \rangle\in \R$和$s_i’=s/ \vert| \widetilde {\bold {b}}<em>i\vert|&gt;0$<br>b. 选择$z_i \sim D</em>{\Z,s_i’,c_i’}$.（只有这一步与最近平面算法不同）<br>c. 计算$\bold{c}</em>{i-1} \leftarrow \bold{c}</em>{i} -z_i\bold{b}<em>i$和$\bold{v}</em>{i-1} \leftarrow \bold{v}</em>{i} +z_i\bold{b}_i$</li>
+<li>输出$\bold{v}_0$.</li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">lattice</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">trapdoor</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/Jianhaojiang-seu/Jianhaojiang-seu.github.io.git/2021/05/11/GVP08,MP12,DM18%E4%B8%AD%E7%9A%84%E6%A0%BC%E5%9F%BA%E9%99%B7%E9%97%A8%E5%87%BD%E6%95%B0/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-古剑奇谭2·永夜初晗凝碧天" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/Jianhaojiang-seu/Jianhaojiang-seu.github.io.git/2021/05/11/%E5%8F%A4%E5%89%91%E5%A5%87%E8%B0%AD2%C2%B7%E6%B0%B8%E5%A4%9C%E5%88%9D%E6%99%97%E5%87%9D%E7%A2%A7%E5%A4%A9/">古剑奇谭2·永夜初晗凝碧天</a>
+    </h1>
+  
+
+        
+        <a href="/Jianhaojiang-seu/Jianhaojiang-seu.github.io.git/2021/05/11/%E5%8F%A4%E5%89%91%E5%A5%87%E8%B0%AD2%C2%B7%E6%B0%B8%E5%A4%9C%E5%88%9D%E6%99%97%E5%87%9D%E7%A2%A7%E5%A4%A9/" class="archive-article-date">
+  	<time datetime="2021-05-11T02:15:43.108Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-05-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="综述"><a href="#综述" class="headerlink" title="综述"></a>综述</h1><p>《永夜初晗凝碧天》作为古剑奇谭的第二部作品讲述了烈山部挣脱流月城困境的故事，通过长安富商子弟乐无异、百草谷天罡闻人羽、太华观半妖三皇子夏夷则以及巫山神女的露草姑娘阿阮这四个可控角色讲述流月城与下届的冲突。神魔对抗、皇权斗争、师徒情义、民族矛盾以及人与道的内涵都在作品价值中有所体现，通过剧情的细致铺成、角色的内心转变进行讲述，能够给玩家带来冲击与思考，是一部剧本上乘的角色扮演游戏。</p>
+<p>尽管存在剧情铺垫过长，玩家强制沉浸的剧本通病，但这也是剧情类RPG的特点。古剑奇谭作为追溯上古奇闻异事的作品，以剑为主题，深度挖掘铸剑、藏剑与用剑的物理效用和文化底蕴。本作更是通过偃甲这一科技元素与铸剑照应，并基于铸剑工艺原理和偃甲制作理论展开剧情，这一创新相对前作中魂魄与轮回等传统道家理念具有科技感。另一方面，本作继承了该系列前传特点，进一步对人性和道义进行了较深的探讨，在架空环境下对家国情怀、儿女情长与人生意义进行了深度体验。</p>
+<p>本作的音乐保持了骆集益、周志华二人的一贯水准，并且有小旭音乐团队的加盟，显得年轻而有朝气。人物曲《高山流水》（谢衣）和战斗音乐《势如破竹》作为杰出作品，对剧情有着极强的渲染能力。</p>
+<p>本作的光影相对前作有很大进步，特别是城镇午后的光线与积水场景。</p>
+<h2 id="剧情"><a href="#剧情" class="headerlink" title="剧情"></a>剧情</h2><h2 id="游戏性"><a href="#游戏性" class="headerlink" title="游戏性"></a>游戏性</h2><p>本作沿用了前作中的星蕴、装备、物品、烹饪、任务和家园系统</p>
+<h2 id="艺术性"><a href="#艺术性" class="headerlink" title="艺术性"></a>艺术性</h2><h3 id="音乐"><a href="#音乐" class="headerlink" title="音乐"></a>音乐</h3><h3 id="美术"><a href="#美术" class="headerlink" title="美术"></a>美术</h3>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">古剑</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/Jianhaojiang-seu/Jianhaojiang-seu.github.io.git/2021/05/11/%E5%8F%A4%E5%89%91%E5%A5%87%E8%B0%AD2%C2%B7%E6%B0%B8%E5%A4%9C%E5%88%9D%E6%99%97%E5%87%9D%E7%A2%A7%E5%A4%A9/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-数据挖掘" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/Jianhaojiang-seu/Jianhaojiang-seu.github.io.git/2021/05/07/%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98/">数据挖掘</a>
+    </h1>
+  
+
+        
+        <a href="/Jianhaojiang-seu/Jianhaojiang-seu.github.io.git/2021/05/07/%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98/" class="archive-article-date">
+  	<time datetime="2021-05-07T12:30:13.408Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-05-07</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="什么是数据挖掘"><a href="#什么是数据挖掘" class="headerlink" title="什么是数据挖掘"></a>什么是数据挖掘</h2><p>数据挖掘是指从大量数据中提取知识（所需信息），实际上是“<strong>知识挖掘</strong>”。含义相同的概念有，<em>“知识提取”</em>，*”数据/模式分析”<em>，</em>“数据考古”<em>和</em>“数据捕捞”*。</p>
+<p>知识发现由以下步骤的迭代序列组成：</p>
+<ol>
+<li><strong>数据清理</strong>（消除噪声和不一致的数据）</li>
+<li><strong>数据集成</strong>（多种数据源可以组合在一起）</li>
+<li><strong>数据选择</strong>（从数据库中提取于分析任务相关的数据）</li>
+<li><strong>数据变化</strong>（数据变化或统一成合适挖掘的形式，如通过<strong>汇总</strong>或<strong>聚集</strong>操作）</li>
+<li><strong>数据挖掘</strong>（基本步骤，使用只能方法提取数据模式）</li>
+<li><strong>模式评估</strong>（根据某种<strong>兴趣度度量</strong>，识别表示知识的真正的有趣的模式）</li>
+<li><strong>知识表示</strong>（使用可视化和知识表示技术，向用户提供提供挖掘的知识）</li>
+</ol>
+<p>*本书使用术语挖掘，</p>
+<p>其中1-4属于预处理步骤，数据挖掘和模式评估用于生成知识并评估模式</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">数据</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/Jianhaojiang-seu/Jianhaojiang-seu.github.io.git/2021/05/07/%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-桶排序" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/Jianhaojiang-seu/Jianhaojiang-seu.github.io.git/2021/05/02/%E6%A1%B6%E6%8E%92%E5%BA%8F/">桶排序</a>
+    </h1>
+  
+
+        
+        <a href="/Jianhaojiang-seu/Jianhaojiang-seu.github.io.git/2021/05/02/%E6%A1%B6%E6%8E%92%E5%BA%8F/" class="archive-article-date">
+  	<time datetime="2021-05-02T01:56:26.727Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-05-02</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="桶排序算法（鸽巢排序）"><a href="#桶排序算法（鸽巢排序）" class="headerlink" title="桶排序算法（鸽巢排序）"></a>桶排序算法（鸽巢排序）</h1>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">algorithm</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/Jianhaojiang-seu/Jianhaojiang-seu.github.io.git/2021/05/02/%E6%A1%B6%E6%8E%92%E5%BA%8F/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-numpy取整" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -197,860 +1045,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/Jianhaojiang-seu/Jianhaojiang-seu.github.io.git/2021/05/01/numpy%E5%8F%96%E6%95%B4/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-2021-04-24-python代码质量提升——第一条" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/Jianhaojiang-seu/Jianhaojiang-seu.github.io.git/2021/04/24/2021-04-24-python%E4%BB%A3%E7%A0%81%E8%B4%A8%E9%87%8F%E6%8F%90%E5%8D%87%E2%80%94%E2%80%94%E7%AC%AC%E4%B8%80%E6%9D%A1/">python代码质量提升——第一条</a>
-    </h1>
-  
-
-        
-        <a href="/Jianhaojiang-seu/Jianhaojiang-seu.github.io.git/2021/04/24/2021-04-24-python%E4%BB%A3%E7%A0%81%E8%B4%A8%E9%87%8F%E6%8F%90%E5%8D%87%E2%80%94%E2%80%94%E7%AC%AC%E4%B8%80%E6%9D%A1/" class="archive-article-date">
-  	<time datetime="2021-04-23T16:56:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-24</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="本文转载自https-www-cnblogs-com-yangmingxianshen-p-8001736-html"><a href="#本文转载自https-www-cnblogs-com-yangmingxianshen-p-8001736-html" class="headerlink" title="本文转载自https://www.cnblogs.com/yangmingxianshen/p/8001736.html"></a>本文转载自<a target="_blank" rel="noopener" href="https://www.cnblogs.com/yangmingxianshen/p/8001736.html">https://www.cnblogs.com/yangmingxianshen/p/8001736.html</a></h4><h2 id="核心知识点："><a href="#核心知识点：" class="headerlink" title="核心知识点："></a><strong>核心知识点：</strong></h2><ol>
-<li><p>列表推导式要比内置的map和filter函数清晰，因为它无需额外编写lambda表达式。</p>
-</li>
-<li><p>列表推导式可以跳过输入列表中的某些元素，如果改用map来做，那就必须辅以filter方能实现。</p>
-</li>
-<li><p>字典与集也支持推导表达式。</p>
-</li>
-</ol>
-<p>Python提供了一套精炼的写法，可以根据一份列表里制作另外一份。这种表达式成为列表推倒式。</p>
-<p>例如，要用列表中每个元素的平方值来创建另一份列表，可以这样实现：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>squares = [x**<span class="number">2</span> <span class="keyword">for</span> x <span class="keyword">in</span> a]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(squares)</span><br><span class="line">[<span class="number">1</span>, <span class="number">4</span>, <span class="number">9</span>, <span class="number">16</span>, <span class="number">25</span>, <span class="number">36</span>, <span class="number">49</span>, <span class="number">64</span>]</span><br></pre></td></tr></table></figure>
-
-<p>除非是调用只有一个参数的函数，否则，对于简单的情况来说，列表推导要比内置的map函数更清晰。</p>
-<p>如果使用map就要创建lambda函数，以便计算新列表中各个元素的值，这会使代码看上去比较乱。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>squares = <span class="built_in">map</span>(<span class="keyword">lambda</span> x:x**<span class="number">2</span>,a)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(squares)</span><br><span class="line">&lt;<span class="built_in">map</span> <span class="built_in">object</span> at <span class="number">0x0000029BC3251748</span>&gt;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">list</span>(squares)</span><br><span class="line">[<span class="number">1</span>, <span class="number">4</span>, <span class="number">9</span>, <span class="number">16</span>, <span class="number">25</span>, <span class="number">36</span>, <span class="number">49</span>, <span class="number">64</span>]</span><br></pre></td></tr></table></figure>
-
-<p>列表推导式不像map那么复杂，可以直接过滤原列表中的元素，使得生成的新列表不会包含对应的计算结果。</p>
-<p>例如，在计算平方值时，我们只想计算那些为2所整除的数。如果采用列表推导式，只需要在循环的后面添加条件表达式即可：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>even_squares = [x**<span class="number">2</span> <span class="keyword">for</span> x <span class="keyword">in</span> a <span class="keyword">if</span> x%<span class="number">2</span> == <span class="number">0</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(even_squares)</span><br><span class="line">[<span class="number">4</span>, <span class="number">16</span>, <span class="number">36</span>, <span class="number">64</span>]</span><br></pre></td></tr></table></figure>
-
-<p>把内置的filter函数与map结合起来，也能达成同样的效果，但代码会非常难懂。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>alt = <span class="built_in">map</span>(<span class="keyword">lambda</span> x:x**<span class="number">2</span>,<span class="built_in">filter</span>(<span class="keyword">lambda</span> x:x%<span class="number">2</span> ==<span class="number">0</span>,a))</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(alt)</span><br><span class="line">&lt;<span class="built_in">map</span> <span class="built_in">object</span> at <span class="number">0x0000029BC3251908</span>&gt;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">list</span>(alt)</span><br><span class="line">[<span class="number">4</span>, <span class="number">16</span>, <span class="number">36</span>, <span class="number">64</span>]</span><br></pre></td></tr></table></figure>
-
-<p>字典（dict）与集（set）也有和列表类似的推到机制。例如：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>chile_ranks = &#123;<span class="string">&#x27;kebi&#x27;</span>:<span class="number">1</span>,<span class="string">&#x27;maoxian&#x27;</span>:<span class="number">2</span>,<span class="string">&#x27;xiaoniao&#x27;</span>:<span class="number">3</span>&#125;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>rank_dict = &#123;rank:name <span class="keyword">for</span> name,rank <span class="keyword">in</span> chile_ranks.items()&#125;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>chile_len_set = &#123;<span class="built_in">len</span>(name) <span class="keyword">for</span> name <span class="keyword">in</span> rank_dict.values()&#125;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(rank_dict)</span><br><span class="line">&#123;<span class="number">1</span>: <span class="string">&#x27;kebi&#x27;</span>, <span class="number">2</span>: <span class="string">&#x27;maoxian&#x27;</span>, <span class="number">3</span>: <span class="string">&#x27;xiaoniao&#x27;</span>&#125;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(chile_len_set)</span><br><span class="line">&#123;<span class="number">8</span>, <span class="number">4</span>, <span class="number">7</span>&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">python</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">代码规范</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/Jianhaojiang-seu/Jianhaojiang-seu.github.io.git/categories/python//" class="article-tag-list-link color2">python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/Jianhaojiang-seu/Jianhaojiang-seu.github.io.git/2021/04/24/2021-04-24-python%E4%BB%A3%E7%A0%81%E8%B4%A8%E9%87%8F%E6%8F%90%E5%8D%87%E2%80%94%E2%80%94%E7%AC%AC%E4%B8%80%E6%9D%A1/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-2021-04-24-pandas数据结构——Series" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/Jianhaojiang-seu/Jianhaojiang-seu.github.io.git/2021/04/24/2021-04-24-pandas%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E2%80%94%E2%80%94Series/">pandas数据结构——Series</a>
-    </h1>
-  
-
-        
-        <a href="/Jianhaojiang-seu/Jianhaojiang-seu.github.io.git/2021/04/24/2021-04-24-pandas%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E2%80%94%E2%80%94Series/" class="archive-article-date">
-  	<time datetime="2021-04-23T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-24</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="Pandas数据结构Series"><a href="#Pandas数据结构Series" class="headerlink" title="Pandas数据结构Series"></a>Pandas数据结构Series</h2><p>pandas.core.series.Series作为Pandas中的数据结构，表示序列。通常初始化方式如下：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">series = pd.Series(np.random.rand(<span class="number">5</span>))</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>从结果看，Series是一个带有<strong>标签</strong>的<strong>一维数组</strong>， 轴标签就是<strong>索引Index</strong>，通过<em>series.index</em>查看起止索引及索引长度。其中保存的数据类型包括整数，浮点数，Python对象等，通过<em>series.dtype</em>查看；<em>series.values</em>可以查看索引和对应的值。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(series)</span><br><span class="line"><span class="built_in">print</span>(series.values, <span class="built_in">type</span>(series.values))</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(series.index)</span><br><span class="line"><span class="built_in">print</span>(series.dtype)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="number">0</span>    <span class="number">0.627657</span></span><br><span class="line"><span class="number">1</span>    <span class="number">0.147622</span></span><br><span class="line"><span class="number">2</span>    <span class="number">0.996135</span></span><br><span class="line"><span class="number">3</span>    <span class="number">0.099315</span></span><br><span class="line"><span class="number">4</span>    <span class="number">0.148019</span></span><br><span class="line">dtype: float64</span><br><span class="line">    </span><br><span class="line">[<span class="number">0.24723021</span> <span class="number">0.75597288</span> <span class="number">0.00866807</span> <span class="number">0.1885997</span>  <span class="number">0.82171525</span>] &lt;<span class="class"><span class="keyword">class</span> &#x27;<span class="title">numpy</span>.<span class="title">ndarray</span>&#x27;&gt;</span></span><br><span class="line"><span class="class"></span></span><br><span class="line"><span class="class"><span class="title">RangeIndex</span>(<span class="params">start=<span class="number">0</span>, stop=<span class="number">5</span>, step=<span class="number">1</span></span>)</span></span><br><span class="line"><span class="class"><span class="title">float64</span></span></span><br></pre></td></tr></table></figure>
-
-<h2 id="Series创建方法"><a href="#Series创建方法" class="headerlink" title="Series创建方法"></a>Series创建方法</h2><ol>
-<li><p><strong>通过字典dict()创建</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">dic =&#123;<span class="string">&#x27;a&#x27;</span>:<span class="number">100</span>,<span class="string">&#x27;b&#x27;</span>:<span class="number">2.5</span>,<span class="string">&#x27;c&#x27;</span>:<span class="string">&#x27;a&#x27;</span>&#125;</span><br><span class="line">series = pd.Series(dic)</span><br><span class="line"><span class="built_in">print</span>(series.values)</span><br><span class="line"><span class="built_in">print</span>(series.dtype)</span><br><span class="line"></span><br><span class="line">[<span class="number">100</span> <span class="number">2.5</span> <span class="string">&#x27;a&#x27;</span>]</span><br><span class="line"><span class="built_in">object</span></span><br></pre></td></tr></table></figure></li>
-</ol>
-<p>当元素类型不一致时，series的类型是一个<strong>object</strong>对象。</p>
-<ol start="2">
-<li><p><strong>通过数组创建</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">array = np.random.randn(<span class="number">5</span>)</span><br><span class="line">tes = pd.Series(array, index=<span class="built_in">list</span>(<span class="string">&#x27;ABCDE&#x27;</span>), dtype=np.float64)</span><br><span class="line"><span class="built_in">print</span>(tes)</span><br><span class="line"></span><br><span class="line">A    <span class="number">0.592528</span></span><br><span class="line">B    <span class="number">0.142648</span></span><br><span class="line">C   -<span class="number">0.517210</span></span><br><span class="line">D   -<span class="number">0.149496</span></span><br><span class="line">E   -<span class="number">0.873149</span></span><br><span class="line">dtype: float64</span><br></pre></td></tr></table></figure>
-
-<p>如果参数index=None，缺省值为RangeIndex(start=0, stop=len(array), step=1]</p>
-</li>
-<li><p><strong>通过标量创建</strong></p>
-<p>通过标量参数对Series进行填充</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">series = pd.Series(<span class="number">10</span>, index=<span class="built_in">list</span>(<span class="string">&#x27;ABCDE&#x27;</span>))</span><br><span class="line"><span class="built_in">print</span>(series)</span><br><span class="line"></span><br><span class="line">A    <span class="number">10</span></span><br><span class="line">B    <span class="number">10</span></span><br><span class="line">C    <span class="number">10</span></span><br><span class="line">D    <span class="number">10</span></span><br><span class="line">E    <span class="number">10</span></span><br><span class="line">dtype: int64</span><br></pre></td></tr></table></figure></li>
-</ol>
-<p>Series还有个name属性，可以通过<em>series.rename()<em>改名或者直接修改</em>series.name</em></p>
-<h2 id="Series的索引和切片"><a href="#Series的索引和切片" class="headerlink" title="Series的索引和切片"></a>Series的索引和切片</h2><ol>
-<li><p>通过索引访问数据，类似list进行切片</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">s = pd.Series([<span class="string">&quot;ABC&quot;</span>, <span class="number">100</span>, <span class="number">22.5</span>], index=[<span class="string">&#x27;1&#x27;</span>,<span class="string">&#x27;2&#x27;</span>,<span class="string">&#x27;3&#x27;</span>,<span class="string">&#x27;4&#x27;</span>])</span><br><span class="line">sum1 = s[<span class="number">0</span>:<span class="number">3</span>] + s[<span class="number">0</span>:<span class="number">3</span>]</span><br><span class="line">sum2 = s[<span class="number">1</span>:<span class="number">3</span>] + s[<span class="number">2</span>:<span class="number">4</span>]</span><br><span class="line"></span><br><span class="line"><span class="number">1</span>    ABCABC</span><br><span class="line"><span class="number">2</span>       <span class="number">200</span></span><br><span class="line"><span class="number">3</span>      <span class="number">45.0</span></span><br><span class="line">dtype: <span class="built_in">object</span></span><br><span class="line"><span class="number">2</span>     NaN</span><br><span class="line"><span class="number">3</span>    <span class="number">45.0</span></span><br><span class="line"><span class="number">4</span>     NaN</span><br><span class="line">dtype: <span class="built_in">object</span></span><br></pre></td></tr></table></figure></li>
-<li><p>查找</p>
-<p>(1). 查找和范围查找</p>
-   <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">s = &#123;<span class="string">&quot;ton&quot;</span>: <span class="number">20</span>, <span class="string">&quot;mary&quot;</span>: <span class="number">18</span>, <span class="string">&quot;jack&quot;</span>: <span class="number">19</span>, <span class="string">&quot;jim&quot;</span>: <span class="number">22</span>, <span class="string">&quot;lj&quot;</span>: <span class="number">24</span>, <span class="string">&quot;car&quot;</span>: <span class="literal">None</span>&#125;</span><br><span class="line">sa = pd.Series(s, name=<span class="string">&quot;age&quot;</span>)</span><br><span class="line"><span class="comment"># 查找index</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;mary&quot;</span> <span class="keyword">in</span> s)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;22&quot;</span> <span class="keyword">in</span> sa.values)</span><br><span class="line"><span class="built_in">print</span>(sa&gt;<span class="number">19</span>)</span><br><span class="line"><span class="built_in">print</span>(sa[sa&gt;<span class="number">19</span>])</span><br><span class="line"><span class="comment"># 运行结果</span></span><br><span class="line"><span class="literal">True</span></span><br><span class="line"><span class="literal">True</span></span><br><span class="line">ton      <span class="literal">True</span></span><br><span class="line">mary    <span class="literal">False</span></span><br><span class="line">jack    <span class="literal">False</span></span><br><span class="line">jim      <span class="literal">True</span></span><br><span class="line">lj       <span class="literal">True</span></span><br><span class="line">car     <span class="literal">False</span></span><br><span class="line"></span><br><span class="line">ton    <span class="number">20.0</span></span><br><span class="line">jim    <span class="number">22.0</span></span><br><span class="line">lj     <span class="number">24.0</span></span><br><span class="line">Name: age, dtype: float64</span><br></pre></td></tr></table></figure>
-
-<p>   series&gt;x 生成对应的bool类型seriesb（具有同样的index），因此series[seriesb]将会根据bool变量的值选择，实现筛选。</p>
-<p>(2). 中位数series.median()</p>
-   <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(sa.median())</span><br><span class="line"><span class="comment"># 生成bool元素的Series</span></span><br><span class="line"><span class="built_in">print</span>(sa &gt; sa.median())</span><br><span class="line"><span class="comment"># 通过Series筛选数据</span></span><br><span class="line"><span class="built_in">print</span>(sa[sa &gt; sa.median()])</span><br><span class="line"></span><br><span class="line"><span class="number">20.0</span></span><br><span class="line"></span><br><span class="line">ton     <span class="literal">False</span></span><br><span class="line">mary    <span class="literal">False</span></span><br><span class="line">jack    <span class="literal">False</span></span><br><span class="line">jim      <span class="literal">True</span></span><br><span class="line">lj       <span class="literal">True</span></span><br><span class="line">car     <span class="literal">False</span></span><br><span class="line">Name: age, dtype: <span class="built_in">bool</span></span><br><span class="line"></span><br><span class="line">jim    <span class="number">22.0</span></span><br><span class="line">lj     <span class="number">24.0</span></span><br><span class="line">Name: age, dtype: float64</span><br></pre></td></tr></table></figure>
-
-<p>(3). 满足条件的批量赋值</p>
-   <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">series = pd.Series([<span class="number">1</span>,<span class="number">4</span>,<span class="number">6</span>,<span class="number">4</span>,<span class="number">7</span>,<span class="number">9</span>,<span class="number">3</span>,<span class="number">5</span>])</span><br><span class="line">series[series % <span class="number">2</span> == <span class="number">0</span>] = <span class="number">0</span></span><br><span class="line"><span class="built_in">print</span>(series.values)</span><br><span class="line"></span><br><span class="line">[<span class="number">1</span> <span class="number">0</span> <span class="number">7</span> <span class="number">0</span> <span class="number">3</span> <span class="number">5</span>]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>3.Series的计算</p>
-<p>series将自动匹配index进行加减乘除计算</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">shipton = &#123;<span class="string">&quot;CN&quot;</span>: <span class="number">2000</span>, <span class="string">&quot;USA&quot;</span>: <span class="number">3800</span>, <span class="string">&quot;UK&quot;</span>: <span class="number">1900</span>, <span class="string">&quot;AU&quot;</span>: <span class="number">400</span>, <span class="string">&quot;JP&quot;</span>: <span class="number">880</span>, <span class="string">&quot;KR&quot;</span>: <span class="literal">None</span>&#125;</span><br><span class="line">marine = &#123;<span class="string">&quot;CN&quot;</span>: <span class="number">1200</span>, <span class="string">&quot;USA&quot;</span>: <span class="number">3800</span>, <span class="string">&quot;UK&quot;</span>: <span class="number">1900</span>, <span class="string">&quot;AU&quot;</span>: <span class="number">400</span>, <span class="string">&quot;KR&quot;</span>: <span class="literal">None</span>, <span class="string">&quot;CAN&quot;</span>: <span class="number">200</span>, <span class="string">&quot;RU&quot;</span>: <span class="number">3200</span>&#125;</span><br><span class="line"></span><br><span class="line">s1 = pd.Series(shipton)</span><br><span class="line">s2 = pd.Series(marine)</span><br><span class="line"><span class="built_in">print</span>(s1 + s2)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 运行结果</span></span><br><span class="line">AU      <span class="number">800.0</span></span><br><span class="line">CAN       NaN</span><br><span class="line">CN     <span class="number">3200.0</span></span><br><span class="line">JP        NaN</span><br><span class="line">KR        NaN</span><br><span class="line">RU        NaN</span><br><span class="line">UK     <span class="number">3800.0</span></span><br><span class="line">USA    <span class="number">7600.0</span></span><br><span class="line">dtype: float64</span><br></pre></td></tr></table></figure></li>
-</ol>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">python</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">pandas</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">data_struct</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/Jianhaojiang-seu/Jianhaojiang-seu.github.io.git/categories/python//" class="article-tag-list-link color2">python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/Jianhaojiang-seu/Jianhaojiang-seu.github.io.git/2021/04/24/2021-04-24-pandas%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E2%80%94%E2%80%94Series/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-R-LWE论文——Lattice-Cyptography-for-the-internet" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/Jianhaojiang-seu/Jianhaojiang-seu.github.io.git/2021/04/23/R-LWE%E8%AE%BA%E6%96%87%E2%80%94%E2%80%94Lattice-Cyptography-for-the-internet/">R-LWE论文——Lattice Cryptography for the Internet</a>
-    </h1>
-  
-
-        
-        <a href="/Jianhaojiang-seu/Jianhaojiang-seu.github.io.git/2021/04/23/R-LWE%E8%AE%BA%E6%96%87%E2%80%94%E2%80%94Lattice-Cyptography-for-the-internet/" class="archive-article-date">
-  	<time datetime="2021-04-23T06:24:54.140Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-23</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Lattice-Cryptography-for-the-Internet"><a href="#Lattice-Cryptography-for-the-Internet" class="headerlink" title="Lattice Cryptography for the Internet"></a>Lattice Cryptography for the Internet</h1><p>Chris Peikert</p>
-<p>2014-06-16</p>
-<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>本文主要介绍了格基密码学以及其可证明的抗量子计算性能。为了在现实世界中密码系统和协议上得到应用，本文提出了一些用于密钥传输的有效格基协议。</p>
-<h2 id="1-引言"><a href="#1-引言" class="headerlink" title="1. 引言"></a>1. 引言</h2><p>（主要介绍了基于环的各类格难题，以及他们建立的各类加密、签名方案）</p>
-<p>R-SIS和R-LWE的在<strong>平均情况下</strong>的困难性的基础：<strong>最坏情况</strong>下的SVP问题在<strong>所谓理想格</strong>中是难以近似求出的，甚至是对于量子计算机而言。</p>
-<p>Both R-SIS and R-lwe enjoy strong provable hardness guarantees: they are hard <em>on average</em> as long as the Shortest Vector Problem is hard to approximate (by quantum computers, in the case of R-LWE) on <strong>so called <em>ideal</em> lattice</strong> in corresponding ring, <em>in the worst case</em>.</p>
-<p>这一结果为R-SIS和R-LWE问题提供了坚实的密码学基础，并通过具体的密码分析成果巩固了这一基础。</p>
-<h3 id="1-1-本文创新点"><a href="#1-1-本文创新点" class="headerlink" title="1.1 本文创新点"></a>1.1 本文创新点</h3><p>本文提出了一个高效实用的格基协议，适用于非对称密码学任务，例如加密、密钥封装和传递和认证密钥交换。</p>
-<h4 id="加密和密钥传递"><a href="#加密和密钥传递" class="headerlink" title="加密和密钥传递"></a>加密和密钥传递</h4><h4 id="认证密钥交换"><a href="#认证密钥交换" class="headerlink" title="认证密钥交换"></a>认证密钥交换</h4><h2 id="2-预备知识"><a href="#2-预备知识" class="headerlink" title="2 预备知识"></a>2 预备知识</h2><p>本文中对实数x，取整为四舍五入；环Z<del>q</del>为商环Z/qZ，例如环的陪集x+qZ（实质上引入了加法和乘法运算）。</p>
-<h3 id="2-1-密码学定义"><a href="#2-1-密码学定义" class="headerlink" title="2.1 密码学定义"></a>2.1 密码学定义</h3><ol>
-<li>安全参数λ是一元的，决定了方案的安全程度</li>
-<li>方案中的算法是高效的(efficient)，即运行在多项式时间内</li>
-<li>如果函数$f(x)$衰减的比任何逆多项式(inverse polynomial) 更快，那么该函数$f(x)$是可忽略的(negligible)。例如$f(x)=o(n^{-c})$，其中$c$为所有大于0的常数。</li>
-<li>对于两个概率分布X,Y（更准确地说，是），如果对所有的多项式时间算法$A$（即高效的算法，efficient algorithm），$Pr[A(X\lambda)] - Pr[A(Yλ)]$对于λ是可忽略的。这一渐进处理可以更精确地通过量化运行时间和概率得到具体表现。</li>
-</ol>
-<h3 id="2-2-次高斯分布"><a href="#2-2-次高斯分布" class="headerlink" title="2.2 次高斯分布"></a>2.2 次高斯分布</h3><p>对本文中的误差项采用<strong>次高斯分布</strong>随机向量的标准定义进行分析，类似**[MP12]**中的分析。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">R-LWE</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/Jianhaojiang-seu/Jianhaojiang-seu.github.io.git/categories/Cryptography//" class="article-tag-list-link color3">Cryptography</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/Jianhaojiang-seu/Jianhaojiang-seu.github.io.git/2021/04/23/R-LWE%E8%AE%BA%E6%96%87%E2%80%94%E2%80%94Lattice-Cyptography-for-the-internet/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-markdown基本语法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/Jianhaojiang-seu/Jianhaojiang-seu.github.io.git/2021/04/22/markdown%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/">markdown基本语法</a>
-    </h1>
-  
-
-        
-        <a href="/Jianhaojiang-seu/Jianhaojiang-seu.github.io.git/2021/04/22/markdown%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/" class="archive-article-date">
-  	<time datetime="2021-04-22T12:32:06.929Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-22</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="1-标题"><a href="#1-标题" class="headerlink" title="1. 标题"></a>1. 标题</h1><p>‘#’的个数分别对应标题级数，例如“###TITLE”表示三级标题</p>
-<h1 id="2-字体"><a href="#2-字体" class="headerlink" title="2. 字体"></a>2. 字体</h1><h3 id="加粗"><a href="#加粗" class="headerlink" title="加粗"></a>加粗</h3><p>加粗字体在文本两侧各用两个星号包裹，例如  <strong>APPLE</strong></p>
-<h3 id="斜体"><a href="#斜体" class="headerlink" title="斜体"></a>斜体</h3><p>倾斜字体在文本两侧各用一个星号包裹，例如  <em>Apple</em></p>
-<h3 id="倾斜加粗"><a href="#倾斜加粗" class="headerlink" title="倾斜加粗"></a>倾斜加粗</h3><p>倾斜加粗字体在文本两侧各用三个星号包裹，例如 <em><strong>Apple</strong></em></p>
-<h3 id="删除线"><a href="#删除线" class="headerlink" title="删除线"></a>删除线</h3><p>倾斜加粗字体在文本两侧各用两个波浪线包裹，例如  <del>Apple</del></p>
-<h3 id="以上效果可以组合使用"><a href="#以上效果可以组合使用" class="headerlink" title="以上效果可以组合使用"></a>以上效果可以组合使用</h3><h1 id="3-引用"><a href="#3-引用" class="headerlink" title="3. 引用"></a>3. 引用</h1><p>在引用的文字前加&gt;即可。引用也可以嵌套，如加两个&gt;&gt;三个&gt;&gt;&gt;<br>例如：</p>
-<blockquote>
-<p>你好</p>
-<blockquote>
-<p>我是东南大学学生</p>
-<blockquote>
-<p>我的研究方向是密码学<br>很高兴见到你<br>再见</p>
-</blockquote>
-</blockquote>
-</blockquote>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">markdown</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">备忘</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/Jianhaojiang-seu/Jianhaojiang-seu.github.io.git/2021/04/22/markdown%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-2021-04-22-高纬度概率及其在数据科学中的应用——第0章" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/Jianhaojiang-seu/Jianhaojiang-seu.github.io.git/2021/04/22/2021-04-22-%E9%AB%98%E7%BA%AC%E5%BA%A6%E6%A6%82%E7%8E%87%E5%8F%8A%E5%85%B6%E5%9C%A8%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8%E2%80%94%E2%80%94%E7%AC%AC0%E7%AB%A0/">高纬度概率及其在数据科学中的应用——第0章</a>
-    </h1>
-  
-
-        
-        <a href="/Jianhaojiang-seu/Jianhaojiang-seu.github.io.git/2021/04/22/2021-04-22-%E9%AB%98%E7%BA%AC%E5%BA%A6%E6%A6%82%E7%8E%87%E5%8F%8A%E5%85%B6%E5%9C%A8%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8%E2%80%94%E2%80%94%E7%AC%AC0%E7%AB%A0/" class="archive-article-date">
-  	<time datetime="2021-04-22T11:56:51.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-22</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="High-Dimensional-Probability-An-Introduction-with-Applicaitons-in-Data-Science"><a href="#High-Dimensional-Probability-An-Introduction-with-Applicaitons-in-Data-Science" class="headerlink" title="High-Dimensional Probability-An Introduction with Applicaitons in Data Science"></a>High-Dimensional Probability-An Introduction with Applicaitons in Data Science</h2><p>作者：罗曼·韦尔希宁</p>
-<p>译者： 冉康启</p>
-<p>阅读本书的目的是理解高纬度高斯分布，并进一步应用于R-LWE问题中的误差采样；其次，复习基础功能在；最后，扩展对概率论高维空间和人工智能基础算法的理解。</p>
-<h2 id="用概率覆盖一个几何集"><a href="#用概率覆盖一个几何集" class="headerlink" title="用概率覆盖一个几何集"></a>用概率覆盖一个几何集</h2><h3 id="卡拉特奥多里定理"><a href="#卡拉特奥多里定理" class="headerlink" title="卡拉特奥多里定理"></a>卡拉特奥多里定理</h3><p>对于n维实数空间中的某个集合T，其凸包中的每个点都可以表示为T中最大n+1个点的凸组合。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">概率论</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">密码学</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/Jianhaojiang-seu/Jianhaojiang-seu.github.io.git/2021/04/22/2021-04-22-%E9%AB%98%E7%BA%AC%E5%BA%A6%E6%A6%82%E7%8E%87%E5%8F%8A%E5%85%B6%E5%9C%A8%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8%E2%80%94%E2%80%94%E7%AC%AC0%E7%AB%A0/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-2021-04-22-高纬度概率及其在数据科学中的应用——第2章" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/Jianhaojiang-seu/Jianhaojiang-seu.github.io.git/2021/04/22/2021-04-22-%E9%AB%98%E7%BA%AC%E5%BA%A6%E6%A6%82%E7%8E%87%E5%8F%8A%E5%85%B6%E5%9C%A8%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8%E2%80%94%E2%80%94%E7%AC%AC2%E7%AB%A0/">高纬度概率及其在数据科学中的应用——第2章</a>
-    </h1>
-  
-
-        
-        <a href="/Jianhaojiang-seu/Jianhaojiang-seu.github.io.git/2021/04/22/2021-04-22-%E9%AB%98%E7%BA%AC%E5%BA%A6%E6%A6%82%E7%8E%87%E5%8F%8A%E5%85%B6%E5%9C%A8%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8%E2%80%94%E2%80%94%E7%AC%AC2%E7%AB%A0/" class="archive-article-date">
-  	<time datetime="2021-04-22T11:56:51.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-22</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="独立随机变量和集中"><a href="#独立随机变量和集中" class="headerlink" title="独立随机变量和集中"></a>独立随机变量和集中</h1><p>集中不等式是一个丰富的课题，满足次高斯分布和次指数分布的随机变量形成了一个自然的概率分布集合。</p>
-<h2 id="2-1-集中不等式"><a href="#2-1-集中不等式" class="headerlink" title="2.1 集中不等式"></a>2.1 集中不等式</h2>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">概率论</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">密码学</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/Jianhaojiang-seu/Jianhaojiang-seu.github.io.git/2021/04/22/2021-04-22-%E9%AB%98%E7%BA%AC%E5%BA%A6%E6%A6%82%E7%8E%87%E5%8F%8A%E5%85%B6%E5%9C%A8%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8%E2%80%94%E2%80%94%E7%AC%AC2%E7%AB%A0/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-2021-04-22-高纬度概率及其在数据科学中的应用——第1章" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/Jianhaojiang-seu/Jianhaojiang-seu.github.io.git/2021/04/22/2021-04-22-%E9%AB%98%E7%BA%AC%E5%BA%A6%E6%A6%82%E7%8E%87%E5%8F%8A%E5%85%B6%E5%9C%A8%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8%E2%80%94%E2%80%94%E7%AC%AC1%E7%AB%A0/">高纬度概率及其在数据科学中的应用——第1章</a>
-    </h1>
-  
-
-        
-        <a href="/Jianhaojiang-seu/Jianhaojiang-seu.github.io.git/2021/04/22/2021-04-22-%E9%AB%98%E7%BA%AC%E5%BA%A6%E6%A6%82%E7%8E%87%E5%8F%8A%E5%85%B6%E5%9C%A8%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8%E2%80%94%E2%80%94%E7%AC%AC1%E7%AB%A0/" class="archive-article-date">
-  	<time datetime="2021-04-22T11:56:51.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-22</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="第一章-随机变量的预备知识"><a href="#第一章-随机变量的预备知识" class="headerlink" title="第一章 随机变量的预备知识"></a>第一章 随机变量的预备知识</h1><h2 id="1-1-随机变量的数字特征"><a href="#1-1-随机变量的数字特征" class="headerlink" title="1.1 随机变量的数字特征"></a>1.1 随机变量的数字特征</h2><p>概率论基础中常用数学期望和方差描述随机变量的数字特征<br>    except = EX, variance = E(X-E(X))<br>同时，还有矩母函数Monent Generation Function<br>    MX(t) = E(exp(tX))<br>对于p&gt;0，X的p阶矩记为E(X^p)，且p阶绝对矩记为E(|X|^p)。</p>
-<h2 id="1-2-经典不等式"><a href="#1-2-经典不等式" class="headerlink" title="1.2 经典不等式"></a>1.2 经典不等式</h2><h2 id="1-3-极限理论"><a href="#1-3-极限理论" class="headerlink" title="1.3 极限理论"></a>1.3 极限理论</h2>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">概率论</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">密码学</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/Jianhaojiang-seu/Jianhaojiang-seu.github.io.git/2021/04/22/2021-04-22-%E9%AB%98%E7%BA%AC%E5%BA%A6%E6%A6%82%E7%8E%87%E5%8F%8A%E5%85%B6%E5%9C%A8%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8%E2%80%94%E2%80%94%E7%AC%AC1%E7%AB%A0/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-仙剑奇侠传三剧情诗词" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/Jianhaojiang-seu/Jianhaojiang-seu.github.io.git/2021/04/22/%E4%BB%99%E5%89%91%E5%A5%87%E4%BE%A0%E4%BC%A0%E4%B8%89%E5%89%A7%E6%83%85%E8%AF%97%E8%AF%8D/">仙剑奇侠传三剧情诗词</a>
-    </h1>
-  
-
-        
-        <a href="/Jianhaojiang-seu/Jianhaojiang-seu.github.io.git/2021/04/22/%E4%BB%99%E5%89%91%E5%A5%87%E4%BE%A0%E4%BC%A0%E4%B8%89%E5%89%A7%E6%83%85%E8%AF%97%E8%AF%8D/" class="archive-article-date">
-  	<time datetime="2021-04-22T09:21:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-22</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="序言"><a href="#序言" class="headerlink" title="序言"></a>序言</h2><p>本文记录仙剑奇侠传三本传的剧情诗词。游戏中按照剧情进度，通过诗词画面进行章节描述。赏析来自仙剑奇侠传吧“aaa545zzz”<br>    text theme test for black square</p>
-<h2 id="诉衷情•旖旎情（景天初遇雪见）bgm-玉满堂"><a href="#诉衷情•旖旎情（景天初遇雪见）bgm-玉满堂" class="headerlink" title="诉衷情•旖旎情（景天初遇雪见）bgm-玉满堂"></a>诉衷情•旖旎情（景天初遇雪见）bgm-玉满堂</h2><p>　　星沉月落夜闻香<br>　　素手出锋芒<br>　　前缘再续新曲<br>　　心有意<br>　　爱无伤</p>
-<p>　　江湖远<br>　　碧空长<br>　　路茫茫<br>　　闲愁滋味<br>　　多感情怀<br>　　无限思量</p>
-<h2 id="赏析"><a href="#赏析" class="headerlink" title="赏析"></a>赏析</h2><p>　　此词为仙三剧情第一部分——旖旎情的开场词，也是整部仙剑三的开篇词，出现在景雪初次见面后雪见离去，景天熟睡之时。上阕描写景天、雪见相逢的经过，下阕则是对整部游戏中二人关系的总括。“星沉月落”，即星辰与月亮都已隐没，而天色仍暗，点出当时的时间是在午夜与黎明之间。“夜闻香”写景天与梦中闻到幽香，指雪见的出现。“素手出锋芒”指景天意外被雪见所伤，“素手”语出《古诗十九首》中“纤纤擢素手”句，指女子柔美雪白的手，而“锋芒”指雪见手中所执的毒蒺藜。这三句话概括了雪见误伤景天事件的经过。“前缘再续新曲”指景天的前世飞蓬与赋予雪见生命的夕瑶在神界的前世之缘，现在得以在景雪二人身上延续。“心有意”与“爱无伤”组成对偶，俱指景天。前句指景天对雪见的一见钟情，而后句颇令笔者费解，其字面意思为“爱情没有伤害”，当是指景天心中对雪见存有好感，并不记恨她使自己受伤，甚至认为这个机会可以使他们之间关系更近一点。</p>
-<p>　　下阕整体性较强，“江湖远，碧空长，路茫茫”总写景天与雪见二人之后漫长的江湖路，给人以寥廓之感，颇为大气。而“闲愁滋味，多感情怀，无限思量”中前两句构成对偶，三句意义大体相同。古诗词中多以“闲愁”代指爱情，“多感情怀”更是不难理解，而此后剧情中景天与雪见二人不时出现的小摩擦又给“闲愁”与“多感”赋予了更多现实的意义，仿佛这惯用的词汇就是为他们量身定做的一般。最后这几句总体写出了景天与雪见磕磕绊绊但历久弥深的感情，气氛幽雅而淡定，温馨而甜蜜。</p>
-<h2 id="一剪梅•寥落风（景天初遇龙葵）-bgm-青玉案"><a href="#一剪梅•寥落风（景天初遇龙葵）-bgm-青玉案" class="headerlink" title="一剪梅•寥落风（景天初遇龙葵） bgm-青玉案"></a>一剪梅•寥落风（景天初遇龙葵） bgm-青玉案</h2><p>　　大梦初醒已千年<br>　　零乱罗衫<br>　　料峭风寒<br>　　放眼难觅旧衣冠<br>　　疑真疑幻<br>　　如梦如烟</p>
-<p>　　看朱成碧心迷乱<br>　　莫问生前<br>　　但惜因缘<br>　　魂无归处为情牵<br>　　贪恋人间<br>　　不羡神仙</p>
-<h2 id="赏析-1"><a href="#赏析-1" class="headerlink" title="赏析"></a>赏析</h2><p>　　此词为仙剑三剧情第二部分——寥落风的开场词，出现在龙葵自魔剑中首次出场，与景天初见后的清晨。本词描写了景天、龙葵初遇时各自的心理，上阕写景天，下阕写龙葵。“大梦初醒已千年”指龙葵从跃入铸剑炉自尽到现在与兄长的转世重逢，已经在魔剑中浑浑噩噩地度过了一千年，自然地流露出一种沧桑之感。“凌乱罗衫”之龙葵的衣服由于铸剑炉的灼热而破烂不堪，仅能勉强蔽体。“料峭风寒”并非实写环境的“冷”，而是在描写龙葵的内心，在魔剑中的千年，龙葵没有得到任何来自他人的温暖，反而一直备受欺凌，故此“风寒”实来自龙葵的内心，其寒彻骨。“放眼难觅旧衣冠”仍写龙葵在魔剑中所感，由于母亲病故，父兄战死，龙葵孤身跳入铸剑炉，而周围的冤魂全无她熟悉的身影，故有此谓。“疑真疑幻，如梦如烟”又转为写龙葵初见景天时的感受，哥哥的音容又出现在龙葵眼前，使她不敢相信，怀疑自己眼前所见是真还是幻，是模糊梦境还是易逝云烟。</p>
-<p>　　下阕转而描写景天，“看朱成碧心迷乱”指景天面前的龙葵时而红衣、时而蓝衣，性格也不断出现巨大的变化，让他不知所措。“看朱成碧”出自唐人李白《前有樽酒行》中句“催弦拂柱与君饮，看朱成碧眼始红。”形容视觉模糊，此处使用，十分恰当。“莫问生前，但惜因缘”，似乎在以作者的身份劝诫龙葵、景天：不要再想前世有什么过去的故事，好好珍惜现在的缘分吧。此处“因缘”并非“姻缘”，因此说二人在此时就有“爱情”是不恰当的。 “魂无归处为情牵，贪恋人间，不羡神仙”这句意思是整体的，写景天在人间有一段美好的感情经历，不光是爱情，更有亲情、友情等等，使他无须留恋天界，亦不必惋惜自己失去的神将身份，可以尽情享受人间的幸福。尽管好事不假，却可怜夕瑶仙子的痴心守候了，虽有雪见陪伴景天，夕瑶终是一生孤独，可叹！可叹！</p>
-<h2 id="眼儿媚•朦胧雾（云霆回忆雨舒）bgm-凄凉雪"><a href="#眼儿媚•朦胧雾（云霆回忆雨舒）bgm-凄凉雪" class="headerlink" title="眼儿媚•朦胧雾（云霆回忆雨舒）bgm-凄凉雪"></a>眼儿媚•朦胧雾（云霆回忆雨舒）bgm-凄凉雪</h2><p>　　身世飘零叹孤独<br>　　回顾盼相扶<br>　　情天不老<br>　　雷霆易逝<br>　　雨过云舒</p>
-<p>　　相逢不忍轻离别<br>　　携手更如初<br>　　风急波涌<br>　　扁舟不系<br>　　终恋江湖</p>
-<h2 id="赏析-2"><a href="#赏析-2" class="headerlink" title="赏析"></a>赏析</h2><p>　　此次为仙三剧情第三部分——朦胧雾的开场词，出现在为景天等人所见的雪见与云霆对话的最后。本词主要描写了雪见的心路历程，上阕写她与云霆，下阕则是她与景天。上阕首句“身世飘零叹孤独”为实写雪见，身世飘零自不必说，而“叹孤独”，则是因为雪见目睹景天龙葵相依而产生误会，自感命运。其实雪见的内心远不像外表那样坚强，而是相当脆弱的，所以又这种感怀也是正常。“回顾盼相扶”正是前一句的结果，雪见希望找到一个真正可以让她依靠，助她复仇的人，是为“盼相扶”。而后三句“情天不老，雷霆易逝，雨过云舒”则应作为整体来理解，我认为这三句其实更为偏向描写云霆，何谓情天不老？乃是说人不会失去感情，即使你的心已经如槁木死灰，依然会有人来在乎你，关心你。正是云霆的写照。而后两句则更为明显，只要仔细看过这词的朋友都会发现其实这两句中嵌入了两个名字：云霆、雨舒。不错，正是这两个人的婚姻悲剧，才使云霆变成了今天这个状态。但是这两句中可有半点悲凉意味？没有，我们能看到的只是雨过天晴、云开雾散的喜悦，也正暗示了之后云霆正常人的生活。</p>
-<p>　　下阕则把注意力拉回到了两位矛盾主角身上，“相思不忍轻离别，携手更如初。”意思明显，说雪见与景天和好如初，因为相思，所以不忍，因为不忍，所以携手如初。这个“不忍轻离别”的“轻”堪称点睛之笔，是为文眼，与“不忍”相配，将雪见最终内心描写得清清楚楚。后三局“风急波涌，扁舟不系，终恋江湖”又可作整体理解，与上阕后三句均以天气为喻，相映成趣。“风急波涌”喻指景雪二人感情路上的小小“插曲”，而后两句话锋一转，道出雪见心意：“终恋江湖”，的确，以雪见之心而论，她是不可能在云府做少夫人的，如此描写，即顺故事情节，又符人物性格，十分真实。不知各位有没有感觉这三句与《诉衷情》中的“江湖远，碧空长，路茫茫”有什么神似之处么？呵呵，姑作前后照应吧。</p>
-<h2 id="采桑子•凄凉雪（雪见身体放置于蜀山冰室）-bgm-凄凉雪"><a href="#采桑子•凄凉雪（雪见身体放置于蜀山冰室）-bgm-凄凉雪" class="headerlink" title="采桑子•凄凉雪（雪见身体放置于蜀山冰室） bgm-凄凉雪"></a>采桑子•凄凉雪（雪见身体放置于蜀山冰室） bgm-凄凉雪</h2><p>　　刻舟行远人归去<br>　　笑靥无凭<br>　　私语无踪<br>　　魂断香销弃旧情</p>
-<p>　　玄冰刻悔风吟恨<br>　　好梦成空<br>　　泪眼迷蒙<br>　　遥看春花朔雪中</p>
-<h2 id="赏析-3"><a href="#赏析-3" class="headerlink" title="赏析"></a>赏析</h2><p>　　此词为仙三剧情第四部分——凄凉雪的开场词，雪见为将镇妖剑交与蜀山掌门而被邪剑仙所杀，景天追悔无及，此词正出现于景天在雪见冰棺前出神之时。从这段剧情开始，仙三剧情陡转，由轻快转向沉重，这首词则是为烘托气氛贡献颇多。此词上阕写雪见，下阕则写景天。上阕首句用《吕氏春秋》“刻舟求剑”典，命运之轮便是那“刻舟”，舟中人为景天，而雪见，就是那把失却的宝剑。时光流转，命运无法挽回，雪见魂归，空留冰冷躯壳。景天守在刻痕处不愿接受事实，但却无法做出任何努力，这种悔恨而无奈的感觉，确实摧人五内。“笑靥无凭，私语无踪，魂断香销弃旧情”，也是指雪见的香销玉殒，生前的如花笑靥、呢喃细语，都已随风而逝，无存于人间，焉能不令人感怀？而“弃”字又最是点睛，弃，本来是主观的动作，用在此处，写雪见离景天而去，却凭添了几分无奈，几分惆怅，效果甚佳。</p>
-<p>　　下阕主要是写景天的悔恨了，不管别人如何想，景天一直坚持认为雪见的死完全是自己的责任，因此一直沉浸于悔恨之中不能自拔。而作者描写却绕开了景天，“玄冰刻悔风吟恨”，如此描写可谓直达景天的内心，在他心中悔恨如此的情况下，自然眼中诸物无不是在悔，在恨，在痛惜雪见的离去，哪里还有它景？这样写确实使表现力高了一截。“好梦成空”中的“好梦”，当指景天之前和雪见所承诺的复仇之后归隐江湖的事，鸳鸯侠侣，岂非好梦？但雪见的死却将之生生击碎，景天的恨于是就更加了一层——对未能实践诺言的“愧”，如此诸感交加，“泪眼迷蒙”自是水到渠成。而最后一句“遥看春花朔雪中”，意思则是相当隐晦，“遥看”是虚写无疑，是指景天的心理活动，说是“遥看”，是为了和“泪眼迷蒙”相称。而“春花秋月”则有虚实两种解释。若为实指，则整部仙剑三似乎只能有两个地方符合“春花朔雪”——一是古城镇，二是冰风谷。但是这两处都是景天与龙葵关系发展的重要地点，在怀念雪见的词中提到，恕我愚笨，似乎没有合适的解释。因此只能理解为虚写。我们知道，春花朔雪，都是经常被用来比喻美景易逝的喻体，春花易凋，朔雪易溶，如果这样考虑的话，这两句便也可以和前三句统一起来了，共同表现了景天对雪见离世、世事无常的感怀。</p>
-<h2 id="谒金门•萧瑟霜（景天雪见于轮回井）"><a href="#谒金门•萧瑟霜（景天雪见于轮回井）" class="headerlink" title="谒金门•萧瑟霜（景天雪见于轮回井）"></a>谒金门•萧瑟霜（景天雪见于轮回井）</h2><p>　　情眷恋<br>　　古往今来相看<br>　　几度流光人更远<br>　　伤离方寸乱</p>
-<p>　　回梦空传幽怨<br>　　依旧尘缘未断<br>　　碧落黄泉寻觅遍<br>　　愁来天不管</p>
-<h2 id="赏析-4"><a href="#赏析-4" class="headerlink" title="赏析"></a>赏析</h2><p>　　此词位仙剑三剧情第五部分——萧瑟霜的开篇词，出现在景雪二人历经千辛万苦终于鬼界重逢之时。整首词不事雕琢，却古朴天成，颇为大气。与其他几首词不同，这首词的上下阕并没有人物感情的区分，但描写对象的时间是不一样的，上阕主要写雪见离世直到回魂仙梦之前一段的情况，而下阕则是写从回魂仙梦直到鬼界重逢之间的一段剧情。上阕前两句“情眷恋，古往今来相看”为倒装语序，将“情眷恋”提前一是为了将其突出，二是为了符合音律。意思为与景雪二人相比，古往今来之有情人的不舍眷恋之情，略与此同。下句“几度流光人更远”，是以比喻乐景之辞抒发哀伤情感，因为“流光”多为喻光辉岁月美好时光，此刻这几度流逝的“流光”却让雪见魂魄越发远离，对比强烈。《姜斋诗话》云：“以乐景写哀，以哀景写乐，一倍增其哀乐。”如此描写，愈发令人动容。最后一句“伤离方寸乱”，古文中以方寸灵台喻人心，此处便指景天之心，因为伤雪见之离而悲痛欲绝，方寸大乱。</p>
-<p>　　下阕气氛有所舒缓。“回梦空传幽怨”指古城镇众人回魂仙梦的剧情。此处有剧情的分支，其中一个为景天梦中重睹雪见之亡，魂魄归天；另一个则有雪见魂魄显影求救于景天，此二者皆可以释“空传幽怨”。“依旧尘缘未断”则是说雪见并未了却尘缘，魂魄不该入鬼界，而尚有复活之可能。“碧落黄泉寻觅遍”脱化自白居易《长恨歌》句：“上穷碧落下黄泉，两处茫茫皆不见。”其中碧落上天、黄泉入地，极写景天寻觅雪见魂魄之苦。最后一句“愁来天不管”，意境堪称绝妙，但意义却是相当含蓄，究竟做何种解？恐怕每个人看法不尽相同。以我来看，这一句乃与上句成为整体，感叹景天寻觅之苦。雪见离世，引出这许多愁绪，然而天道有常，人死不能复生，要想救活雪见，还得看景天如何努力，有何缘法了。也许这个解释虽能说通，但不算完美。而我还有一个更大胆的想法：何不在“愁”前加一字，成为“闲愁”？众所周知，闲愁乃是比喻爱情的，这样一来这句便可释为：景天对雪见的情如许之深，以之作为动力去追寻，即便是主宰生死的上天，也无法阻止了。当然，这种解释，只能作为个人的文字游戏，恐怕是不能拿去说服人的，姑记于此，权当娱乐吧。</p>
-<h2 id="御街行•失魂雨（冰风谷，龙葵与景天从悬崖落下）"><a href="#御街行•失魂雨（冰风谷，龙葵与景天从悬崖落下）" class="headerlink" title="御街行•失魂雨（冰风谷，龙葵与景天从悬崖落下）"></a>御街行•失魂雨（冰风谷，龙葵与景天从悬崖落下）</h2><p>　　纷纷雪落人飘坠<br>　　同死生<br>　　共玉碎<br>　　前尘后世君莫问<br>　　柔肠百结如醉<br>　　情丝未断<br>　　尘缘难了<br>　　萦绕千千岁</p>
-<p>　　舍却残生犹不悔<br>　　身已空<br>　　尽成泪<br>　　路长梦短无寻处<br>　　总是情愁滋味<br>　　眉间心上<br>　　柔肠百结<br>　　尽付东流水</p>
-<h2 id="赏析-5"><a href="#赏析-5" class="headerlink" title="赏析"></a>赏析</h2><p>　　此词为仙剑三剧情第六部分——失魂雨的开篇词，出现在龙葵为救景天与之一同坠下山崖之后。由于仙三最后一部分——流转虹基本就是分支的结局了，所以这首词也是仙三最后一首剧情分界词（自造名词，勿怪•）。此词上下阕侧重没有明显分别，可以说是一力描写龙葵。上阕首句“纷纷雪落人飘坠”以简单七字写明了当时的环境和情况，“飘坠”的“飘”字实为妙笔，与雪花的纷飞相拟，表现出了小葵在此时是何等的无助而绝望。“同死生，共玉碎”构成对偶，表现了龙葵与“哥哥”景天同生共死（虽然她是鬼）的决心，等候千年方得相遇，岂能让缘分就这样结束？宁可同殁，不愿独活。“前尘后世君莫问”一句，作者似以局外人的身份劝诫龙葵与景天：不要执着于前世因果，好好珍惜今日缘分便是。其实由这段剧情开始，龙葵与景天的关系变化越来越明显，龙葵显然已经渐渐认识到景天不再是她的哥哥，却变成了一个值得她爱的人，抛却前尘往事的桎梏，确是龙葵此时最好的选择。而下句“柔肠百结如醉”正是龙葵在此种思想变化下内心的写照：有茫然，有迷惘，更多的是幸福；有疑惑，有彷徨，更多的是沉醉。最后三句“情丝未断，尘缘难了，萦绕千千岁”中前两句又是对仗，这两句是对以前寄身于魔剑中的龙葵而言的，她与哥哥的感情并未因生死相隔而斩断，她与哥哥的缘分也并未因六界轮回而消亡，这份感情，伴随她度过了千年岁月。当然我们要注意的是，这三句与前两句是并不矛盾的，因为前两句强调的只是这份感情与缘分的变化，而变化是并不与其延续相矛盾的。</p>
-<p>　　下阕首句“舍却残生犹不悔”与上阕“同死生，共玉碎”同义，都是指龙葵愿意以一切代价去救景天，即使是舍弃她的“生命”。这里的“残生”，意义并不同于我们经常说的残生，而是指“残缺的生命”，因为小葵是没有身体的，也就是说，“生命”是残缺的。虽然小葵是鬼，并不可能把“生命”再“舍却”一次。但是在这种情况下的本能反应，还是让我们看到了小葵的勇气和决心。不过我们在前面的动画里了解到，小葵确实抓住了景天，也就是说她是有身体的了，又怎会有“舍却残生犹不悔”之言呢？作者在接下来来的两句中作出了解释：“身已空，尽成泪”。小葵为了救景天而坠下山崖，同时也失去了辛苦修得的成型身体，重又“成空”；而“尽成泪”则是夸张的说法。当然，小葵是不会后悔的，这个“泪”，当是她的遗憾之泪。“路长梦短无寻处，总是情愁滋味”两句中有两个关键词需要理解，这里面的“路”是指龙葵与景天共同经历的江湖之路，“梦”是指龙葵重逢兄长的千年之梦，这两句表示的就是龙葵与景天共同经历了许多美好的时光，而那寻觅兄长的旧梦却已渐渐模糊，千年前的龙阳，早已经无处寻觅了。龙葵对于景天，已经萌生了“情”（当然不是兄妹之情），因情而生愁，小葵的心中，自然已经都是“情愁滋味”了。最后三句“眉间心上，柔肠百结，尽复东流水”中，“眉间心上”用以喻“情愁”，应是化自李清照《一剪梅》：“此情无计可消除，才下眉头，却上心头。”此处亦然。心怀如此之愁，焉能不“柔肠百结”？以小葵的性格，柔肠百结却又无人可以倾诉，怕也只能将这满腔愁绪“尽复东流水”了。总而言之，此词上下两阕仿若一枚硬币正反两面，换个角度，却又是互为表里，“合力”将龙葵的复杂心境描画得淋漓尽致。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">仙剑</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">诗词</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/Jianhaojiang-seu/Jianhaojiang-seu.github.io.git/2021/04/22/%E4%BB%99%E5%89%91%E5%A5%87%E4%BE%A0%E4%BC%A0%E4%B8%89%E5%89%A7%E6%83%85%E8%AF%97%E8%AF%8D/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-我的第一篇blog" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/Jianhaojiang-seu/Jianhaojiang-seu.github.io.git/2021/04/22/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87blog/">我的第一篇blog</a>
-    </h1>
-  
-
-        
-        <a href="/Jianhaojiang-seu/Jianhaojiang-seu.github.io.git/2021/04/22/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87blog/" class="archive-article-date">
-  	<time datetime="2021-04-22T07:48:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-22</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="序言"><a href="#序言" class="headerlink" title="序言"></a>序言</h2><p>这是我的第一篇博客文章，采用markdown格式，通过win10记事本编辑</p>
-<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><p>基本属于是胡言乱语，虽然是本人的生日，但也是有一些文字需要展示。</p>
-<p>本人今日与同门庆祝，并作词《一剪梅》</p>
-<p>一剪梅 诞<br>春日流黄逐碧涛，风起心摇，雨过魂销<br>瓶中旧酒再相邀，往事如牢，碎影难捞<br>术业无形志更高，临阵磨刀，暮暮朝朝<br>明夕入梦九龙桥，桃正夭夭，人正飘飘</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">生活</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/Jianhaojiang-seu/Jianhaojiang-seu.github.io.git/2021/04/22/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87blog/">展开全文 >></a>
         </p>
       
 
@@ -1226,6 +1220,46 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">诗词</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Lattice</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">lattice</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">trapdoor</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">lattices</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">古剑</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">数据</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Language</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">日本语</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">algorithm</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">complexity</a>
               </li>
             
             <div class="clearfix"></div>
